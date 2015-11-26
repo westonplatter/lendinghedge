@@ -1,0 +1,18 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+
+development:
+  <<: *default
+  database: lh_fast_development
+
+test:
+  <<: *default
+  database: lh_fast_test
+
+production:
+  <<: *default
+  database: lh_fast_production
+  username: lh_fast
+  password: <%= ENV['LH_FAST_DATABASE_PASSWORD'] %>
