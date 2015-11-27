@@ -1,0 +1,17 @@
+/*
+ * This is a manifest file that'll automatically include all the stylesheets available in this directory
+ * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
+ * the top of the compiled file, but it's generally better to create a new file per style scope.
+ *= require be/bootstrap.min
+ *= require be/bootstrap-reset
+ *= require be/animate
+ *= require be/font-awesome
+ *= require be/ionicons
+ *= require be/sweet-alert.min
+ *= require be/notification
+ *= require be/codemirror
+ *= require be/ambiance
+ *= require be/jquery.dataTables.min.css
+ *= require be/style
+ *= require be/helper
+*/

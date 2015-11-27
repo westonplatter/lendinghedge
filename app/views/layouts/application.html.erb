@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>LhFast</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <title>LendingHedge</title>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= csrf_meta_tags %>
+  <%= render :partial => "/shared/head" %>
 </head>
+
+
 <body>
-
 <%= yield %>
-
+<%= javascript_include_tag 'application' %>
 </body>
 </html>
+

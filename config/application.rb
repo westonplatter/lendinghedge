@@ -13,6 +13,12 @@ Bundler.require(*Rails.groups)
 
 module LhFast
   class Application < Rails::Application
+    # timezone
     config.time_zone = 'UTC'
+
+    # rspec tests automatically generated
+    config.generators do |g|
+      g.test_framework :rspec, views: false
+    end
   end
 end
