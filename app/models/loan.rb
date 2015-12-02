@@ -1,5 +1,7 @@
 class Loan < ActiveRecord::Base
 
+  has_many :notes
+
   def self.parse_csv_row(row)
     l = Loan.new \
       loan_id: row["id"],
@@ -66,6 +68,38 @@ class Loan < ActiveRecord::Base
     return nil if str.nil?
     return nil if str.empty?
     DateTime.strptime(str, '%b-%Y')
+  end
+
+  def self.fetch_fico_by_loan_id(loan_id)
+    agent = Mechanize.new { |a|
+      a.user_agent_alias = 'Mac Safari'
+    }
+
+    # pick the cookies obtained from authenticated session
+    agent.cookie_jar.load "data_cookies/lendingclub_cookies.yml"
+
+    base_url = "https://www.lendingclub.com/foliofn/loanDetail.action?loan_id="
+    url = base_url + loan_id.to_s
+
+    # page = agent.get("http://www.google.com/")
+    page = agent.get(url)
+
+    doc = Nokogiri::HTML(page.body, "UTF-8")
+
+    fico_range = doc.css('div.credit_history table.loan-details > tr:first').children[3].text
+
+    fico_mean = compute_fico_mean(fico_range)
+
+    @loan = Loan.find_by(loan_id: loan_id)
+
+    @loan.update_attributes(fico_mean: fico_mean)
+  end
+
+  def self.compute_fico_mean(fico_range)
+    l, h = fico_range.split("-").map(&:to_i)
+    return l if (h.nil? and l > 0)
+    return h if (l.nil? and h > 0)
+    return ((h + l)/2)
   end
 
 end

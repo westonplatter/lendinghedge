@@ -10,3 +10,6 @@ config/application.yml
 public/public
 
 data/*
+!data/.gitkeep
+data_cookies/*
+!data_cookies/.gitkeep

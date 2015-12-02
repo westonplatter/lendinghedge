@@ -20,6 +20,13 @@ Rails.application.routes.draw do
         post :post_upload
       end
     end
+
+    resources :notes do
+      collection do
+        get :upload
+        post :post_upload
+      end
+    end
   end
 
   get 'home/index'
