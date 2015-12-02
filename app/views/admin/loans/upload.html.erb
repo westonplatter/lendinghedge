@@ -1,0 +1,9 @@
+<%= form_tag(post_upload_admin_loans_path, method: "post",  :multipart => true) do %>
+  <br>
+  <br>
+
+  <%= file_field_tag :file %>
+  <br>
+  <br>
+  <%= submit_tag %>
+<% end %>

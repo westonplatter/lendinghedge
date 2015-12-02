@@ -4,6 +4,25 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'spec_helper'
 require 'rspec/rails'
 
+module ControllerMacros
+
+  # def login_admin
+  #   before(:each) do
+  #     @request.env["devise.mapping"] = Devise.mappings[:admin]
+  #     sign_in FactoryGirl.create(:admin) # Using factory girl as an example
+  #   end
+  # end
+
+  def login_user(user)
+    before(:each) do
+      @request.env["devise.mapping"] = Devise.mappings[:user]
+      user ||= FactoryGirl.create(:user)
+      # user.confirm! # or set a confirmed_at inside the factory. Only necessary if you are using the "confirmable" module
+      sign_in user
+    end
+  end
+end
+
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
@@ -14,4 +33,6 @@ RSpec.configure do |config|
 
   config.infer_spec_type_from_file_location!
   config.filter_rails_from_backtrace!
+
+  config.include ControllerMacros, :type => :controller
 end

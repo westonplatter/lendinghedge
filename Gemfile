@@ -13,12 +13,16 @@ gem 'twitter-bootstrap-rails'
 gem 'bootstrap-generators'
 gem 'sass-rails', '>= 3.2'
 gem 'uglifier', '>= 1.3.0'
+gem 'sidekiq'
+gem 'sinatra', :require => nil
+gem 'puma'
 
 group :development do
   gem 'better_errors'
   gem 'quiet_assets'
   gem 'pry'
   gem 'spring'
+  gem 'binding_of_caller'
 end
 
 

@@ -13,6 +13,19 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :admin do
+    resources :loans do
+      collection do
+        get :upload
+        post :post_upload
+      end
+    end
+  end
+
   get 'home/index'
   root to: 'home#index'
+
+
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
 end
