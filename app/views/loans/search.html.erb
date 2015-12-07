@@ -1,0 +1,13 @@
+<h1>Loans#search</h1>
+
+<%= render partial: "/loans/search_form" %>
+<%= render partial: "/loans/summary" %>
+
+<br>
+<br>
+
+<ul>
+  <% @loans.each do |loan| %>
+    <li><pre><%= loan.attributes.to_yaml %></pre></li>
+  <% end %>
+</ul>

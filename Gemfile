@@ -24,6 +24,7 @@ gem 'sidekiq'
 gem 'sidekiq-throttler'
 gem 'sinatra', :require => nil
 gem 'uglifier', '>= 1.3.0'
+gem 'will_paginate'
 
 group :development do
   gem 'better_errors'

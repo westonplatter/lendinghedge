@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
 
-  get 'dashboard/index'
+  resources :strategies
+  resources :loans, only: [:index, :show] do
+    collection do
+      post :search
+    end
+  end
 
   devise_for :users, controllers: {}
 

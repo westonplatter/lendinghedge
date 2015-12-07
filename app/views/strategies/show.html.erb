@@ -1,5 +1,17 @@
 <h3>Show Strategy</h3>
 
+<%= link_to("Edit", edit_strategy_path(@strategy)) %>
+<br>
+<br>
+<%= link_to("Delete", strategy_path(@strategy), method: :delete) %>
+<br>
+<br>
+
+<!-- render the summary page -->
 <pre>
-<%= @trategy.inspect %>
+<%= @result.count %>
+</pre>
+
+<pre>
+<%= @strategy.to_yaml %>
 </pre>

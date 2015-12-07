@@ -7,10 +7,21 @@
   <%= render :partial => "/shared/head" %>
 </head>
 
-
 <body>
-<%= yield %>
-<%= javascript_include_tag 'application' %>
+  <%= render partial: '/shared/auth_left_side' %>
+
+  <section class="content">
+    <%= render partial: "/shared/auth_header" %>
+
+    <div class="wraper container-fluid">
+      <%= yield %>
+    </div>
+
+    <%= render partial: "/shared/auth_footer" %>
+  </section>
+
+  <%= javascript_include_tag 'application' %>
 </body>
+
 </html>
 

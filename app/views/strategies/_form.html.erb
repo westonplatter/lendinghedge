@@ -1,7 +1,10 @@
 <%= form_for(@strategy) do |f| %>
+
   <%= f.label :name %>
-  <%= f.input :name %>
+  <%= f.text_field :name %>
+
+  <%= f.label :search_params %>
+  <%= f.text_area :search_params %>
 
   <%= f.submit %>
-
 <% end %>

@@ -1,7 +1,14 @@
 <h3>Index Strategy</h3>
+
+<br>
+<%= link_to("New Strategy", new_strategy_path) %>
+<br>
+<br>
+
 <ul>
-  <% @strategy.each do |strategy| %>
+  <% @strategies.each do |strategy| %>
     <li>
+      <%= link_to("View", strategy_path(strategy)) %>
       <pre><%= strategy.inspect %></pre>
     </li>
   <% end %>
