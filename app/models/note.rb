@@ -48,4 +48,11 @@ class Note < ActiveRecord::Base
     raise ArgumentError.new("invalid value for Boolean: \"#{x}\"")
   end
 
+  def self.ransack_params_from_strategy(params_hash)
+    {
+      "loan_dti_gteq" => params_hash["dti_gteq"],
+      "loan_dti_lteq" => params_hash["dti_lteq"],
+    }
+  end
+
 end

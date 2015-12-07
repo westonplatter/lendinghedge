@@ -5,12 +5,25 @@
 <br>
 <br>
 
-<ul>
-  <% @strategies.each do |strategy| %>
-    <li>
-      <%= link_to("View", strategy_path(strategy)) %>
-      <pre><%= strategy.inspect %></pre>
-    </li>
-  <% end %>
-</ul>
+<table class="table table-striped">
+  <thead>
+    <th colspan="2">Actions</th>
+    <th>Params</th>
+  </thead>
 
+  <tbody>
+    <% @strategies.each do |strategy| %>
+      <tr>
+        <td>
+          <%= link_to("View", strategy_path(strategy)) %>
+        </td>
+        <td>
+          <%= link_to("Edit", edit_strategy_path(strategy)) %>
+        </td>
+        <td>
+          <%= strategy.search_params.inspect %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

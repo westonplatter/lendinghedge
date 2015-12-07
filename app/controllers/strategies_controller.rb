@@ -8,9 +8,22 @@ class StrategiesController < ApplicationController
   def show
     @strategy = current_user.strategies.find(params[:id])
 
-    @result = Loan.limit(100)
-    @result = @result.ransack(@strategy.search_params.to_hash)
-    @result = @result.result(distict: true)
+    @loans = nil
+    @nores = nil
+
+    if !@strategy.search_params.blank?
+      @loans = Loan.
+        ransack(@strategy.search_params.to_hash).
+        result(distict: true)
+
+      note_ransack_params = Note.ransack_params_from_strategy(@strategy.search_params)
+
+      @notes = Note.
+        ransack(note_ransack_params).
+        result(distict: true)
+    else
+      nil
+    end
   end
 
   def new
@@ -41,7 +54,7 @@ class StrategiesController < ApplicationController
     end
   end
 
-  def delete
+  def destroy
     @strategy = current_user.strategies.find(params[:id])
 
     if @strategy.destroy

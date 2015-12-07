@@ -8,10 +8,16 @@
 <br>
 
 <!-- render the summary page -->
+
+<h5>Results Strategy</h5>
 <pre>
-<%= @result.count %>
+Loans: <%= @loans.count %>
+Notes: <%= @notes.count %>
 </pre>
 
+<ul>
+</ul>
+
 <pre>
-<%= @strategy.to_yaml %>
+<%= @strategy.attributes.to_yaml %>
 </pre>

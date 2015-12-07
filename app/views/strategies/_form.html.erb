@@ -1,10 +1,20 @@
+<% require 'json' %>
+
 <%= form_for(@strategy) do |f| %>
 
-  <%= f.label :name %>
-  <%= f.text_field :name %>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= f.label :name %>
+        <%= f.text_field :name, class: "form-control" %>
+      </div>
 
-  <%= f.label :search_params %>
-  <%= f.text_area :search_params %>
+      <div class="form-group">
+        <%= f.label :search_params %>
+        <%= f.text_area :search_params, value: JSON.pretty_generate(@strategy.search_params), class: "form-control" %>
+      </div>
+    </div>
+  </div>
 
   <%= f.submit %>
 <% end %>
