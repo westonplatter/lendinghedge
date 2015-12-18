@@ -1,6 +1,11 @@
 class FetchLoanFicoWorker
   include Sidekiq::Worker
 
+  sidekiq_options \
+    :queue => :single,
+    :retry => false,
+    :backtrace => true
+
   def perform(loan_id)
     base = 5
     r = Random.new
@@ -18,8 +23,14 @@ class FetchLoanFicoWorker
 
     sleep(total)
 
-    logger.info "FetchLoanFico for LoanId = #{loan_id}"
 
-    Loan.fetch_fico_by_loan_id(loan_id)
+    begin
+      logger.info "FetchLoanFico for LoanId = #{loan_id}"
+      Loan.fetch_fico_by_loan_id(loan_id)
+    rescue Exception => e
+      logger.info "FetchLoanFico for LoanId = #{loan_id}"
+      SaveCookieJarWorker.new.perform()
+    end
+
   end
 end

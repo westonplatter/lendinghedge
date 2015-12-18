@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151205195243) do
+ActiveRecord::Schema.define(version: 20151218013703) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -106,6 +106,82 @@ ActiveRecord::Schema.define(version: 20151205195243) do
     t.datetime "updated_at",                                       null: false
   end
 
+  create_table "old_loans", id: false, force: :cascade do |t|
+    t.integer  "loan_id",                                     null: false
+    t.integer  "member_id"
+    t.float    "loan_amount"
+    t.float    "funded_amount"
+    t.float    "funded_amount_invested"
+    t.integer  "term"
+    t.float    "interest_rate"
+    t.float    "installment"
+    t.string   "grade",                           limit: 255
+    t.string   "sub_grade",                       limit: 255
+    t.string   "employment_title",                limit: 255
+    t.string   "employment_length",               limit: 255
+    t.string   "home_ownership",                  limit: 255
+    t.float    "annual_income"
+    t.integer  "income_is_verfied"
+    t.string   "issue_date",                      limit: 255
+    t.integer  "loan_status"
+    t.string   "payment_plan",                    limit: 255
+    t.string   "url",                             limit: 255
+    t.text     "description"
+    t.string   "purpose",                         limit: 255
+    t.string   "title",                           limit: 255
+    t.string   "zip_code",                        limit: 255
+    t.string   "address_state",                   limit: 255
+    t.float    "dti"
+    t.integer  "delinquencies2_years"
+    t.string   "earliest_credit_line",            limit: 255
+    t.integer  "fico_range_low"
+    t.integer  "fico_range_high"
+    t.integer  "inquiries_last6_months"
+    t.integer  "months_since_last_inquiry"
+    t.integer  "months_since_last_delinquency"
+    t.integer  "months_since_last_record"
+    t.integer  "open_accounts"
+    t.integer  "public_records"
+    t.float    "revolving_balance"
+    t.float    "revolving_utilization"
+    t.integer  "total_accounts"
+    t.integer  "initial_list_status"
+    t.float    "outstanding_principal"
+    t.float    "outstanding_principal_invested"
+    t.float    "total_payment"
+    t.float    "total_payment_invested"
+    t.float    "total_received_principal"
+    t.float    "total_received_interest"
+    t.float    "total_received_late_fees"
+    t.float    "recoveries"
+    t.float    "collection_recovery_fees"
+    t.string   "last_payment_date",               limit: 255
+    t.float    "last_payment_amount"
+    t.string   "next_payment_date",               limit: 255
+    t.string   "last_credit_pull_date",           limit: 255
+    t.integer  "last_fico_range_high"
+    t.integer  "last_fico_range_low"
+    t.integer  "collections12_excluding_medical"
+    t.integer  "months_since_last_major_derog"
+    t.datetime "updated_at",                                  null: false
+    t.datetime "created_at",                                  null: false
+    t.string   "policy_code",                     limit: 255
+  end
+
+  add_index "old_loans", ["loan_id"], name: "index_loans_loan_id", using: :btree
+  add_index "old_loans", ["loan_id"], name: "loans_loan_id", using: :btree
+
+  create_table "roles", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "resource_id"
+    t.string   "resource_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
+  add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
+
   create_table "strategies", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "name"
@@ -131,5 +207,12 @@ ActiveRecord::Schema.define(version: 20151205195243) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "users_roles", id: false, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "role_id"
+  end
+
+  add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
 
 end
