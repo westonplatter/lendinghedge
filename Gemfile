@@ -29,6 +29,9 @@ gem 'will_paginate'
 
 group :development do
   gem 'better_errors'
+  gem 'capistrano', '~> 3.1'
+  gem 'capistrano-rails', '~> 1.1'
+  gem 'capistrano-puma', require: false
   gem 'quiet_assets'
   gem 'pry'
   gem 'spring'
