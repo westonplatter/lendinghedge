@@ -29,9 +29,13 @@ gem 'will_paginate'
 
 group :development do
   gem 'better_errors'
+
   gem 'capistrano', '~> 3.1'
+  gem 'capistrano-bundler', '~> 1.1.2'
   gem 'capistrano-rails', '~> 1.1'
-  gem 'capistrano-puma', require: false
+  gem 'capistrano-rbenv', '~> 2.0'
+  gem 'capistrano3-puma', github: 'seuros/capistrano-puma'
+
   gem 'quiet_assets'
   gem 'pry'
   gem 'spring'

@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/seuros/capistrano-puma.git
+  revision: c1d705db52a99f5222503038865d8c6c0a23530e
+  specs:
+    capistrano3-puma (1.2.2)
+      capistrano (~> 3.0)
+      puma (>= 2.6)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -57,11 +65,12 @@ GEM
     capistrano-bundler (1.1.4)
       capistrano (~> 3.1)
       sshkit (~> 1.2)
-    capistrano-puma (0.2.3)
-      capistrano (>= 3.0)
     capistrano-rails (1.1.5)
       capistrano (~> 3.1)
       capistrano-bundler (~> 1.1)
+    capistrano-rbenv (2.0.3)
+      capistrano (~> 3.1)
+      sshkit (~> 1.3)
     capybara (2.5.0)
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
@@ -290,8 +299,10 @@ DEPENDENCIES
   binding_of_caller
   bootstrap-generators
   capistrano (~> 3.1)
-  capistrano-puma
+  capistrano-bundler (~> 1.1.2)
   capistrano-rails (~> 1.1)
+  capistrano-rbenv (~> 2.0)
+  capistrano3-puma!
   capybara
   coffee-rails (~> 4.0.0)
   devise
@@ -319,4 +330,4 @@ DEPENDENCIES
   will_paginate
 
 BUNDLED WITH
-   1.10.6
+   1.11.2
