@@ -38,14 +38,18 @@ set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', '
 ################################################################################
 # capistrano-bundler
 #
-set :bundle_roles, :all                                         # this is default
-set :bundle_servers, -> { release_roles(fetch(:bundle_roles)) } # this is default
+# set :bundle_roles, :all                                         # this is default
+# set :bundle_servers, -> { release_roles(fetch(:bundle_roles)) } # this is default
 # set :bundle_binstubs, -> { shared_path.join('bin') }            # default: nil
 # set :bundle_gemfile, -> { release_path.join('MyGemfile') }      # default: nil
 set :bundle_path, -> { shared_path.join('bundle') }             # this is default
-set :bundle_without, %w{development test}.join(' ')             # this is default
-set :bundle_flags, '--deployment --quiet'                       # this is default
-set :bundle_env_variables, {}                                   # this is default
+
+puts "==============="
+puts "#{shared_path.join('bundle')}"
+
+# set :bundle_without, %w{development test}.join(' ')             # this is default
+# set :bundle_flags, '--deployment --quiet'                       # this is default
+# set :bundle_env_variables, {}                                   # this is default
 
 
 ################################################################################
@@ -55,7 +59,7 @@ set :rbenv_type, :user
 set :rbenv_ruby, '2.2.4'
 # set :rbenv_ruby, File.read('.ruby-version').strip
 set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
-set :rbenv_map_bins, %w{rake gem bundle ruby rails}
+# set :rbenv_map_bins, %w{rake gem bundle ruby rails}
 set :rbenv_roles, :all # default value
 
 
