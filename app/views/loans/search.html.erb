@@ -6,8 +6,18 @@
 <br>
 <br>
 
-<ul>
+<table class="table table-striped">
+  <thead>
+    <th>LoanId</th>
+    <th>Interest Rate</th>
+    <th>Funded Amount</th>
+  </thead>
+
   <% @loans.each do |loan| %>
-    <li><pre><%= loan.attributes.to_yaml %></pre></li>
+    <tr>
+      <td><%= loan.loan_id %></td>
+      <td><%= loan.int_rate %></td>
+      <td><%= loan.loan_amnt %></td>
+    </tr>
   <% end %>
-</ul>
+</table>

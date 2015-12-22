@@ -1,16 +1,58 @@
 <%= search_form_for(@q, url: search_loans_path, method: :post) do |f| %>
-
   <div class="row">
     <div class="col-md-4">
+
       <div class="form-group">
-        <%= f.label :loans_dti_gteq %>
-        <%= f.search_field :loans_dti_gteq %>
+        <%= f.label :dti_gteq %>
+        <%= f.search_field :dti_gteq %>
+      </div>
+      <div class="form-group">
+        <%= f.label :dti_lteq %>
+        <%= f.search_field :dti_lteq %>
       </div>
 
       <div class="form-group">
-        <%= f.label :loans_dti_lteq %>
-        <%= f.search_field :loans_dti_lteq %>
+        <%= f.label :loan_amnt_gteq %>
+        <%= f.search_field :loan_amnt_gteq %>
       </div>
+      <div class="form-group">
+        <%= f.label :loan_amnt_lteq %>
+        <%= f.search_field :loan_amnt_lteq %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :funded_amnt_gteq %>
+        <%= f.search_field :funded_amnt_gteq %>
+      </div>
+      <div class="form-group">
+        <%= f.label :funded_amnt_lteq %>
+        <%= f.search_field :funded_amnt_lteq %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :term_lteq %>
+        <%= f.search_field :term_gteq %>
+      </div>
+      <div class="form-group">
+        <%= f.label :term_lteq %>
+        <%= f.search_field :term_lteq %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :int_rate_gteq %>
+        <%= f.search_field :int_rate_gteq %>
+      </div>
+      <div class="form-group">
+        <%= f.label :int_rate_lteq %>
+        <%= f.search_field :int_rate_lteq %>
+      </div>
+
+      <div class="form-group">
+        <% ["A", "B", "C", "D", "E", "F", "G"].each do |grade| %>
+          <%= f.check_box :grade_cont_any, {}, grade %>
+        <% end %>
+      </div>
+
     </div>
   </div>
 

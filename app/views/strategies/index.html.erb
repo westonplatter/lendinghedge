@@ -7,7 +7,7 @@
 
 <table class="table table-striped">
   <thead>
-    <th colspan="2">Actions</th>
+    <th colspan="3">Actions</th>
     <th>Params</th>
   </thead>
 
@@ -19,6 +19,9 @@
         </td>
         <td>
           <%= link_to("Edit", edit_strategy_path(strategy)) %>
+        </td>
+        <td>
+          <%= link_to("Delete", strategy_path(strategy), method: :delete) %>
         </td>
         <td>
           <%= strategy.search_params.inspect %>

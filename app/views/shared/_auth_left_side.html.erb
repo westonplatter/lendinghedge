@@ -23,7 +23,9 @@
                         <a href="#"><i class="ion-flask"></i> <span class="nav-label">Stragies</span></a>
                         <ul class="list-unstyled">
                             <li><%= link_to("All", strategies_path) %></li>
-
+                            <% display_strategies.each do |strategy| %>
+                                <li><%= link_to(strategy.short_name, strategy) %></li>
+                            <% end %>
                         </ul>
                     </li>
 
