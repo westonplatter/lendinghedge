@@ -41,7 +41,7 @@ Rails.application.routes.draw do
   # tools and engines
   #
   require 'sidekiq/web'
-  authenticate :user, lambda { |u| user.has_role? :admin } do
+  authenticate :user, lambda { |user| user.has_role? :admin } do
     mount Sidekiq::Web => '/sidekiq'
   end
 end

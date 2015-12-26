@@ -14,7 +14,8 @@ Loan.where("fico_mean is null").limit(100).map {|l| FetchLoanFicoWorker.perform_
 ``
 
 ```sh
-Loan.where("fico_mean is null").where("loan_id is not null").first(20).map{|l| FetchLoanFicoWorker.perform_async(l.loan_id) }
+num = 200
+Loan.where("fico_mean is null").where("loan_id is not null").first(num).map{|l| FetchLoanFicoWorker.perform_async(l.loan_id) }
 ```
 
 ## License
