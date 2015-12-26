@@ -23,10 +23,20 @@ set :log_level, :info
 # set :pty, true
 
 # Default value for :linked_files is []
-set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/application.yml')
+linked_files = [
+  'config/database.yml',
+  'config/application.yml'
+]
+set :linked_files, fetch(:linked_files, []).push(linked_files)
 
 # Default value for linked_dirs is []
-set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets')
+linked_dirs = [
+  'log',
+  'tmp/pids',
+  'tmp/cache'
+  'tmp/sockets'
+]
+set :linked_dirs, fetch(:linked_dirs, []).push(linked_dirs)
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
@@ -84,6 +94,29 @@ set :puma_init_active_record, false
 set :puma_preload_app, true
 set :nginx_use_ssl, false
 
+################################################################################
+# capistrano sidekiq
+#
+:sidekiq_default_hooks => true
+:sidekiq_pid => File.join(shared_path, 'tmp', 'pids', 'sidekiq.pid')
+:sidekiq_env => fetch(:rack_env, fetch(:rails_env, fetch(:stage)))
+:sidekiq_log => File.join(shared_path, 'log', 'sidekiq.log')
+:sidekiq_options => nil
+:sidekiq_require => nil
+:sidekiq_tag => nil
+:sidekiq_config => nil # if you have a config/sidekiq.yml, do not forget to set this.
+:sidekiq_queue => nil
+:sidekiq_timeout => 10
+:sidekiq_role => :app
+:sidekiq_processes => 1
+:sidekiq_options_per_process => nil
+:sidekiq_concurrenc y => nil
+:sidekiq_monit_templates_path => 'config/deploy/templates'
+:sidekiq_monit_use_sudo => true
+:sidekiq_cmd => "#{fetch(:bundle_cmd, "bundle")} exec sidekiq" # Only for capistrano2.5
+:sidekiqctl_cmd => "#{fetch(:bundle_cmd, "bundle")} exec sidekiqctl" # Only for capistrano2.5
+:sidekiq_user => nil #user to run sidekiq as
+
 
 ################################################################################
 # default tasks
@@ -103,4 +136,4 @@ end
 ################################################################################
 # callbacks
 #
-# after "deploy:update_code", "deploy:migrate"
+after "deploy:update_code", "deploy:migrate"
