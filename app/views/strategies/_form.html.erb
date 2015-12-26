@@ -7,9 +7,11 @@
         <%= f.text_field :name, class: "form-control" %>
       </div>
 
+      <% value = @strategy.search_params.blank? ? [] : JSON.pretty_generate(@strategy.search_params) %>
+
       <div class="form-group">
         <%= f.label :search_params %>
-        <%= f.text_area :search_params, value: JSON.pretty_generate(@strategy.search_params), class: "form-control" %>
+        <%= f.text_area :search_params, value: value, class: "form-control" %>
       </div>
     </div>
   </div>
