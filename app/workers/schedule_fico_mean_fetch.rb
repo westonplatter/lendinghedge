@@ -3,7 +3,7 @@ class ScheduleFicoMeanFetch
 
   def perform
     # run 100 loans every 30 minutes
-    num = 100
+    num = 50
     Loan.
       where("fico_mean is null").
       where("loan_id is not null").
