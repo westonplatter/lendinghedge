@@ -18,6 +18,14 @@ build:
     # rails test execution
     steps:
       - script:
+        name: copy application.yml
+        code: cp $WERCKER_ROOT/config/application.test.yml $WERCKER_ROOT/config/application.yml
+
+      - script:
+        name: copy database.yml
+        code: cp $WERCKER_ROOT/config/database.test.yml $WERCKER_ROOT/config/database.yml
+
+      - script:
         name: bundle - nokogiri use system libraries
         code: bundle config build.nokogiri --use-system-libraries
 
