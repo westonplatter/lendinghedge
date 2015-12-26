@@ -24,6 +24,7 @@ gem 'rolify'
 gem 'sass-rails', '>= 3.2'
 gem 'sidekiq'
 gem 'sidekiq-rate-limiter', require:'sidekiq-rate-limiter/server'
+gem 'sidekiq-scheduler'
 gem 'sinatra', require: nil
 gem 'uglifier', '>= 1.3.0'
 gem 'will_paginate'
