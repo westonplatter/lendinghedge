@@ -17,10 +17,9 @@ build:
 
     # rails test execution
     steps:
-      - script:
-        name: echo nodejs information
-        code: |
-          echo "node version $(node -v) running"
+      - script: |
+        sudo apt-get update
+        sudo apt-get install node
 
       - script:
         name: bundle - nokogiri use system libraries
