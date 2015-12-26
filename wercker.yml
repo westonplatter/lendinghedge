@@ -8,7 +8,7 @@ box: mwallasch/docker-ruby-node
 # You can also use services such as databases. Read more on our dev center:
 # http://devcenter.wercker.com/docs/services/index.html
 services:
-  - id: postgres
+  - wercker/postgresql
   - id: redis
   - id: memcached
 
@@ -21,9 +21,7 @@ build:
         name: copy application.yml
         code: cp $WERCKER_ROOT/config/application.test.yml $WERCKER_ROOT/config/application.yml
 
-      - script:
-        name: copy database.yml
-        code: cp $WERCKER_ROOT/config/database.test.yml $WERCKER_ROOT/config/database.yml
+      - rails-database-yml
 
       - script:
         name: bundle - nokogiri use system libraries
