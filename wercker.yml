@@ -18,14 +18,6 @@ build:
     # rails test execution
     steps:
       - script:
-        name: update apt-get
-        code: sudo apt-get update
-
-      - script:
-        name: install node
-        code: sudo apt-get install node
-
-      - script:
         name: bundle - nokogiri use system libraries
         code: bundle config build.nokogiri --use-system-libraries
 
