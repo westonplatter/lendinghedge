@@ -9,7 +9,7 @@ class StrategiesController < ApplicationController
     @strategy = current_user.strategies.find(params[:id])
 
     @loans = nil
-    @nores = nil
+    @notes = nil
 
     if !@strategy.search_params.blank?
       @loans = Loan.

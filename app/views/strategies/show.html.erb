@@ -11,8 +11,8 @@
 
 <h5>Results Strategy</h5>
 <pre>
-Loans: <%= @loans.count %>
-Notes: <%= @notes.count %>
+Loans: <%= @loans.try(:count) %>
+Notes: <%= @notes.try(:count) %>
 </pre>
 
 <ul>
