@@ -31,6 +31,10 @@ build:
 
       - script:
         name: rspec
+        code: bin/rake db:migrate RAILS_ENV=test
+
+      - script:
+        name: rspec
         code: bundle exec rspec
 
     # slack
