@@ -12,8 +12,8 @@ Sidekiq.configure_server do |config|
   # https://github.com/moove-it/sidekiq-scheduler
   config.on(:startup) do
     if Rails.env.production?
-      scheduler_file = Rails.root.join("config/scheduler.yml")
-      Sidekiq.schedule = YAML.load_file(scheduler_file)
+      Sidekiq::Scheduler.enabled = true
+      Sidekiq.schedule = YAML.load_file(Rails.root.join("config/scheduler.yml"))
       Sidekiq::Scheduler.reload_schedule!
     else
       Sidekiq::Scheduler.enabled = false
