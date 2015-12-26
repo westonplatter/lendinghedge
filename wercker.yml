@@ -18,9 +18,16 @@ build:
     # rails test execution
     steps:
       - script:
+        name: echo nodejs information
+        code: |
+          echo "node version $(node -v) running"
+
+      - script:
         name: bundle - nokogiri use system libraries
         code: bundle config build.nokogiri --use-system-libraries
+
       - bundle-install
+
       - script:
         name: rspec
         code: bundle exec rspec
