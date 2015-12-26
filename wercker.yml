@@ -31,7 +31,7 @@ build:
 
       - script:
         name: rspec
-        code: bin/rake db:migrate RAILS_ENV=test
+        code: bundle exec rake db:migrate RAILS_ENV=test
 
       - script:
         name: rspec
