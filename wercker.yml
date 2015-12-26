@@ -42,5 +42,5 @@ build:
       - slack-notifier:
         url: $SLACK_URL
         channel: lendinghedge-dev
-        username: werckerbot-boom-boom
-        notify_on: "failed"
+        username: werckerbot
+        # notify_on: "failed"
