@@ -23,20 +23,10 @@ set :log_level, :info
 # set :pty, true
 
 # Default value for :linked_files is []
-linked_files = [
-  'config/database.yml',
-  'config/application.yml'
-]
-set :linked_files, fetch(:linked_files, []).push(linked_files)
+set :linked_files, fetch(:linked_files, []).push('config/database.yml','config/application.yml')
 
 # Default value for linked_dirs is []
-linked_dirs = [
-  'log',
-  'tmp/pids',
-  'tmp/cache'
-  'tmp/sockets'
-]
-set :linked_dirs, fetch(:linked_dirs, []).push(linked_dirs)
+set :linked_dirs, fetch(:linked_dirs, []).push('log','tmp/pids','tmp/cache','tmp/sockets')
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
@@ -53,10 +43,6 @@ set :linked_dirs, fetch(:linked_dirs, []).push(linked_dirs)
 # set :bundle_binstubs, -> { shared_path.join('bin') }            # default: nil
 # set :bundle_gemfile, -> { release_path.join('MyGemfile') }      # default: nil
 set :bundle_path, -> { shared_path.join('bundle') }             # this is default
-
-puts "==============="
-puts "#{shared_path.join('bundle')}"
-
 # set :bundle_without, %w{development test}.join(' ')             # this is default
 # set :bundle_flags, '--deployment --quiet'                       # this is default
 # set :bundle_env_variables, {}                                   # this is default
@@ -97,25 +83,25 @@ set :nginx_use_ssl, false
 ################################################################################
 # capistrano sidekiq
 #
-:sidekiq_default_hooks => true
-:sidekiq_pid => File.join(shared_path, 'tmp', 'pids', 'sidekiq.pid')
-:sidekiq_env => fetch(:rack_env, fetch(:rails_env, fetch(:stage)))
-:sidekiq_log => File.join(shared_path, 'log', 'sidekiq.log')
-:sidekiq_options => nil
-:sidekiq_require => nil
-:sidekiq_tag => nil
-:sidekiq_config => nil # if you have a config/sidekiq.yml, do not forget to set this.
-:sidekiq_queue => nil
-:sidekiq_timeout => 10
-:sidekiq_role => :app
-:sidekiq_processes => 1
-:sidekiq_options_per_process => nil
-:sidekiq_concurrenc y => nil
-:sidekiq_monit_templates_path => 'config/deploy/templates'
-:sidekiq_monit_use_sudo => true
-:sidekiq_cmd => "#{fetch(:bundle_cmd, "bundle")} exec sidekiq" # Only for capistrano2.5
-:sidekiqctl_cmd => "#{fetch(:bundle_cmd, "bundle")} exec sidekiqctl" # Only for capistrano2.5
-:sidekiq_user => nil #user to run sidekiq as
+# set :sidekiq_default_hooks => true
+# set :sidekiq_pid => File.join(shared_path, 'tmp', 'pids', 'sidekiq.pid')
+# set :sidekiq_env => fetch(:rack_env, fetch(:rails_env, fetch(:stage)))
+# set :sidekiq_log => File.join(shared_path, 'log', 'sidekiq.log')
+# set :sidekiq_options => nil
+# set :sidekiq_require => nil
+# set :sidekiq_tag => nil
+# set :sidekiq_config => nil # if you have a config/sidekiq.yml, do not forget to set this.
+# set :sidekiq_queue => nil
+# set :sidekiq_timeout => 10
+# set :sidekiq_role => :app
+# set :sidekiq_processes => 1
+# set :sidekiq_options_per_process => nil
+# set :sidekiq_concurrency => nil
+# set :sidekiq_monit_templates_path => 'config/deploy/templates'
+# set :sidekiq_monit_use_sudo => true
+# set :sidekiq_cmd => "#{fetch(:bundle_cmd, "bundle")} exec sidekiq" # Only for capistrano2.5
+# set :sidekiqctl_cmd => "#{fetch(:bundle_cmd, "bundle")} exec sidekiqctl" # Only for capistrano2.5
+# set :sidekiq_user => nil #user to run sidekiq as
 
 
 ################################################################################
@@ -131,9 +117,3 @@ namespace :deploy do
     end
   end
 end
-
-
-################################################################################
-# callbacks
-#
-after "deploy:update_code", "deploy:migrate"
