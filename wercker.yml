@@ -8,7 +8,7 @@ box: mwallasch/docker-ruby-node
 # You can also use services such as databases. Read more on our dev center:
 # http://devcenter.wercker.com/docs/services/index.html
 services:
-  - wercker/postgresql
+  - id: postgresql
   - id: redis
   - id: memcached
 
