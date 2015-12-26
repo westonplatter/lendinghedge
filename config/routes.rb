@@ -37,6 +37,11 @@ Rails.application.routes.draw do
   get 'home/index'
   root to: 'home#index'
 
+  #
+  # tools and engines
+  #
   require 'sidekiq/web'
-  mount Sidekiq::Web => '/sidekiq'
+  authenticate :user, lambda { |u| user.has_role? :admin } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
 end
