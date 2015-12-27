@@ -20,5 +20,8 @@ module LhFast
     config.generators do |g|
       g.test_framework :rspec, views: false
     end
+
+    # auto load the lib directory
+    config.autoload_paths << Rails.root.join('lib')
   end
 end

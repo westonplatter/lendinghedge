@@ -1,20 +1,9 @@
 # application.yml
 
-LENDINGCLUB_EMAIL: 'westonplatter@gmail.com'
-LENDINGCLUB_PASSWORD: 'wghjlnms123Glc'
-
-development:
-  haha: 'haha_dev'
-  redis_url: 'redis://127.0.0.1:6379/11'
-  devise: 489810ef3693e469212d98609c723ff1ed815d7f9d60ec13f7d150f41da07b7f3caf35ba81d274f882cc7b839aee9516dd3cd7440176ac210a0ba099e95d9d2b
+LENDINGCLUB_EMAIL: 'abc123'
+LENDINGCLUB_PASSWORD: 'abc'
 
 testing:
   haha: 'haha_test'
   redis_url: 'redis://127.0.0.1:6379/11'
   devise: 489810ef3693e469212d98609c723ff1ed815d7f9d60ec13f7d150f41da07b7f3caf35ba81d274f882cc7b839aee9516dd3cd7440176ac210a0ba099e95d9d2b
-
-production:
-  haha: 'haha_prod'
-  redis_url: 'redis://127.0.0.1:6379/11'
-  devise: 489810ef3693e469212d98609c723ff1ed815d7f9d60ec13f7d150f41da07b7f3caf35ba81d274f882cc7b839aee9516dd3cd7440176ac210a0ba099e95d9d2b
-  secret_key_base: f471fa4c56f1c1bd4972162d4248caeb67307dffed10956bce562c4473a154bb8c25e3e1a07456e197d37dee471aa711cc07f770781bc3cf8714a04a46873f05
