@@ -6,7 +6,7 @@ class DownloadEfolioWorker
     :retry => false,
     :backtrace => true
 
-  def perform(file_full_path)
+  def perform
     Importer::Efolio.download
   end
 end

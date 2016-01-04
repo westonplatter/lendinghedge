@@ -29,10 +29,36 @@ module Importer
       updated_at
     }
 
-    def self.exception_logger
-      @@exception_logger ||= Logger.new("#{Rails.root}/log/import_logger.log")
+    #
+    # download
+    #
+    def self.download
+      agent = Mechanize.new { |a|
+        a.user_agent_alias = 'Mac Safari'
+      }
+
+      agent.get('https://www.lendingclub.com/account/gotoLogin.action') do |page|
+        page.form_with(:action => '/account/login.action') do |form|
+          form.login_email =  ENV['LENDINGCLUB_EMAIL']
+          form.login_password = ENV['LENDINGCLUB_PASSWORD']
+        end.submit
+      end
+
+      timestamp = Time.now.to_formatted_s(:iso8601)
+      filename = "notes-#{timestamp}.csv"
+      full_file_path = Rails.root.join("tmp/downloads/", filename)
+
+      agent.pluggable_parser.default = Mechanize::Download
+      agent.get('https://resources.lendingclub.com/SecondaryMarketAllNotes.csv').save(full_file_path)
+
+      sleep 2
+
+      ImportEfolioWorker.perform_async(full_file_path)
     end
 
+    #
+    # import
+    #
     def self.import(file)
         i = 0
 
@@ -67,6 +93,10 @@ module Importer
         end
 
         store lines
+    end
+
+    def self.exception_logger
+      @@exception_logger ||= Logger.new("#{Rails.root}/log/import_logger.log")
     end
 
     def self.table_name
@@ -139,30 +169,5 @@ module Importer
         "#{f} = EXCLUDED.#{f}"
       end.join(', ')
     end
-
-    def self.download
-      agent = Mechanize.new { |a|
-        a.user_agent_alias = 'Mac Safari'
-      }
-
-      agent.get('https://www.lendingclub.com/account/gotoLogin.action') do |page|
-        page.form_with(:action => '/account/login.action') do |form|
-          form.login_email =  ENV['LENDINGCLUB_EMAIL']
-          form.login_password = ENV['LENDINGCLUB_PASSWORD']
-        end.submit
-      end
-
-      timestamp = Time.now.to_formatted_s(:iso8601)
-      filename = "notes-#{timestamp}.csv"
-      full_file_path = Rails.root.join("tmp/downloads/", filename)
-
-      agent.pluggable_parser.default = Mechanize::Download
-      agent.get('https://resources.lendingclub.com/SecondaryMarketAllNotes.csv').save(full_file_path)
-
-      sleep 2
-
-      ImportEfolioWorker.perform_async(full_file_path)
-    end
-
   end
 end
