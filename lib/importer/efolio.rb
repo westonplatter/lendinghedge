@@ -75,7 +75,7 @@ module Importer
           lines << line
 
           if lines.size >= 50
-            exception_logger.info("line #{i}    ---    progresss % = #{(1.0*i)/total_lines}") if (i % 10000) == 0
+            exception_logger.info("line #{i}    ---    progresss % = #{(1.0*i)/total_lines}")
 
             begin
               lines = CSV.parse(lines.join, options = {col_sep: ',', row_sep: "\n"})
