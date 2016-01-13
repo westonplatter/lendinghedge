@@ -8,4 +8,5 @@ Rails.application.config.assets.version = '1.0'
 # Rails.application.config.assets.precompile += %w( search.js )
 
 Rails.application.config.assets.precompile += %w( frontend.css frontend.js )
-Rails.application.config.assets.precompile += %w( favicon )
+Rails.application.config.assets.precompile += %w( favicon.ico )
+
