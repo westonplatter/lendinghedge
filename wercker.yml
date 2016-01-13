@@ -24,6 +24,10 @@ build:
       - rails-database-yml
 
       - script:
+        name: delete docker images cache
+        code: rm -rf $ WERCKER_CACHE_DIR
+
+      - script:
         name: bundle - nokogiri use system libraries
         code: bundle config build.nokogiri --use-system-libraries
 
