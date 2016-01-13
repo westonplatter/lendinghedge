@@ -1,3 +1,4 @@
+<h3>Upload a CSV file</h3>
 <%= form_tag(post_upload_admin_notes_path, method: "post",  :multipart => true) do %>
   <br>
   <br>
@@ -5,5 +6,13 @@
   <%= file_field_tag :file %>
   <br>
   <br>
+  <%= submit_tag %>
+<% end %>
+
+<br>
+<br>
+
+<h3>Download file LendingClub eFolio File</h3>
+<%= form_for(download_and_load_admin_loans_path, method: :post) do |f| %>
   <%= submit_tag %>
 <% end %>

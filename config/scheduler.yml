@@ -4,8 +4,8 @@ ScheduleFicoMeanFetch:
   cron: "*/30 9,10,11,12,13,14,15,16,17,18,19 * * * America/Denver"
 
 # runs 12:05, 1:05, 2:05, etc
-# DownloadEfolioWorker:
-#   cron: "5 * * * * America/Denver"
+DownloadEfolioWorker:
+  cron: "0 0,6,12,18 * * * America/Denver"
 
 # queue_documents_for_indexing:
 #   cron: "0 0 * * *"

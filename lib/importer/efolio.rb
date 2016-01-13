@@ -92,7 +92,17 @@ module Importer
           end
         end
 
-        store lines
+        store(lines)
+
+
+        cleanup(file)
+    end
+
+    #
+    # cleanup
+    #
+    def cleanup(file)
+      File.delete(file)
     end
 
     def self.exception_logger

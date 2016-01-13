@@ -30,5 +30,9 @@ module Admin
       redirect_to action: :upload
     end
 
+    def download_and_load
+      DownloadEfolioWorker.perform_async
+    end
+
   end
 end

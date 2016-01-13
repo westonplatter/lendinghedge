@@ -30,6 +30,7 @@ Rails.application.routes.draw do
       collection do
         get :upload
         post :post_upload
+        post :download_and_load
       end
     end
   end
