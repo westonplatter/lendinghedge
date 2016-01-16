@@ -111,7 +111,7 @@ module Importer::Efolio
       select(:id, :order_id).
       find_each(batch_size: 5000) do |n|
         i += 1
-        exception_logger.info("current_order #{i}") if (i%1000 = 0)
+        exception_logger.info("current_order #{i}") if (i%1000 == 0)
         $redis.sadd :note_current_order_ids, n.order_id
       end
 
