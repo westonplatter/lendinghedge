@@ -26,6 +26,7 @@ module Importer::Efolio
     application_type
     created_at
     updated_at
+    market_status
   }
 
   #
@@ -202,8 +203,9 @@ module Importer::Efolio
   def self.data_to_sql(lines)
     now = Time.now.utc.to_s
     created_at, updated_at = [now, now]
+    market_status = Note.market_statuses[:archived]
 
-    lines = lines.collect{|l| l << created_at; l << updated_at}
+    lines = lines.collect{|l| l << created_at; l << updated_at; l << market_status }
 
     data = lines.collect do |v|
       # manipulation of the data into our own formats

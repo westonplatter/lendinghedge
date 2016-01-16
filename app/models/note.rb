@@ -26,6 +26,7 @@
 #  application_type        :string
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
+#  market_status           :integer          default(0)
 #
 
 class Note < ActiveRecord::Base

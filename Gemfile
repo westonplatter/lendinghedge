@@ -42,6 +42,7 @@ group :development do
   gem 'quiet_assets'
   gem 'pry'
   gem 'pry-doc'
+  gem 'shoulda-matchers'
   gem 'spring'
   gem 'binding_of_caller'
 end
