@@ -111,7 +111,7 @@ module Importer::Efolio
       select(:id, :order_id).
       find_each(batch_size: 5000) do |n|
         i += 1
-        exception_logger.info("current_order #{i}")
+        exception_logger.info("current_order #{i}") if (i%1000 = 0)
         $redis.sadd :note_current_order_ids, n.order_id
       end
 
@@ -148,19 +148,18 @@ module Importer::Efolio
 
     i = 0
 
-    $redis.
-      smembers(:note_diff_order_ids).
-      each do |order_id|
-        order_ids << order_id
+    $redis.smembers(:note_diff_order_ids).each do |order_id|
+      order_ids << order_id
 
-        if order_ids.size > 5000
-          i += 1
-          exception_logger.info("update_market_status ##{i}") if (i%1000 == 0)
+      if order_ids.size > 5000
+        i += 1
+        msg = "update_market_status ##{i}"
+        exception_logger.info(msg) if (i%1000 == 0)
 
-          update_market_status(order_ids, status)
-          order_ids = []
-        end
+        update_market_status(order_ids, status)
+        order_ids = []
       end
+    end
 
     update_market_status(order_ids, status)
 
@@ -173,13 +172,13 @@ module Importer::Efolio
     exception_logger.info("remove_intactive_notes end")
   end
 
-  def self.update_market_status(note_ids, status)
-    formatted_note_ids = note_ids.collect(&:to_i).join(",")
+  def self.update_market_status(order_ids, status)
+    formatted_note_ids = order_ids.collect(&:to_i).join(",")
 
     sql = <<-end.squish
       UPDATE #{table_name}
       SET market_status = #{status}
-      WHERE note_id IN (#{formatted_note_ids})
+      WHERE order_id IN (#{formatted_note_ids})
     end
 
     connection.execute(sql)
