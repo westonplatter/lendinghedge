@@ -76,7 +76,7 @@ module Importer::Efolio
 
       lines << line
 
-      if lines.size >= 50
+      if lines.size >= 1000
         exception_logger.info("line #{i}    ---    progresss % = #{(1.0*i)/total_lines}")
 
         begin
@@ -137,7 +137,7 @@ module Importer::Efolio
       each do |order_id|
         order_ids << order_id
 
-        if order_ids.size > 1000
+        if order_ids.size > 5000
           update_market_status(order_ids, status)
           order_ids = []
         end
@@ -203,7 +203,7 @@ module Importer::Efolio
   def self.data_to_sql(lines)
     now = Time.now.utc.to_s
     created_at, updated_at = [now, now]
-    market_status = Note.market_statuses[:archived]
+    market_status = Note.market_statuses[:active]
 
     lines = lines.collect{|l| l << created_at; l << updated_at; l << market_status }
 
