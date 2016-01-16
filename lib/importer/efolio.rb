@@ -78,7 +78,6 @@ module Importer
             exception_logger.info("line #{i}    ---    progresss % = #{(1.0*i)/total_lines}")
 
             begin
-              lines = CSV.parse(lines.join, options = {col_sep: ',', row_sep: "\n"})
               store lines
             rescue Exception => e
               exception_logger.error('-----------------------------------')
@@ -92,8 +91,7 @@ module Importer
           end
         end
 
-        store(lines)
-
+        store(lines) unless lines.empty?
 
         cleanup(file)
     end
@@ -114,7 +112,8 @@ module Importer
     end
 
     def self.store(lines)
-      return if lines.blank? or lines == ["\n"]
+      lines = CSV.parse(lines.join, options = {col_sep: ',', row_sep: "\n", skip_blanks: true})
+      return if lines.empty?
 
       sql = <<-end.squish
         INSERT INTO #{table_name} (#{fields_to_sql(FIELDS)})
@@ -132,12 +131,13 @@ module Importer
     end
 
     def self.fields_to_sql(fields)
-      # fields.collect{|f| connection.quote_column_name(f) }.join(',')
       fields.join(', ')
     end
 
     def self.data_to_sql(lines)
-      created_at, updated_at = [Time.now.utc, Time.now.utc]
+      now = Time.now.utc.to_s
+      created_at, updated_at = [now, now]
+
       lines = lines.collect{|l| l << created_at; l << updated_at}
 
       data = lines.collect do |v|

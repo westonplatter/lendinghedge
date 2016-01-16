@@ -41,6 +41,7 @@ group :development do
   gem 'guard-zeus'
   gem 'quiet_assets'
   gem 'pry'
+  gem 'pry-doc'
   gem 'spring'
   gem 'binding_of_caller'
 end
