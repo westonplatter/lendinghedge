@@ -103,15 +103,21 @@ module Importer::Efolio
   #
   def self.remove_intactive_notes(full_file_path)
 
+    i = 0
+
     # co, current orders
     Note.
       active.
       select(:id, :order_id).
-      find_each(batch_size: 5000) {|n| $redis.sadd :note_current_order_ids, n.order_id }
+      find_each(batch_size: 5000) do |n|
+        i += 1
+        exception_logger.info("current_order #{i}")
+        $redis.sadd :note_current_order_ids, n.order_id
+      end
 
     i = 0
 
-    # io, import ordders
+    # io, import orders
     IO.foreach(full_file_path) do |line|
       i += 1
       next if i < 2
@@ -120,8 +126,12 @@ module Importer::Efolio
       parsed_line = x.first
       next if parsed_line.nil?
 
+      exception_logger.info("import_orders line ##{i}") if (i%1000 == 0)
+
       $redis.sadd :note_import_order_ids, parsed_line[2]
     end
+
+    exception_logger.info("sdiffstore start")
 
     $redis.sdiffstore(
       :note_diff_order_ids,
@@ -129,8 +139,14 @@ module Importer::Efolio
       :note_import_order_ids
     )
 
+    exception_logger.info("sdiffstore end")
+
     order_ids = []
     status = Note.market_statuses[:archived]
+
+    exception_logger.info("update_market_status start")
+
+    i = 0
 
     $redis.
       smembers(:note_diff_order_ids).
@@ -138,6 +154,9 @@ module Importer::Efolio
         order_ids << order_id
 
         if order_ids.size > 5000
+          i += 1
+          exception_logger.info("update_market_status ##{i}") if (i%1000 == 0)
+
           update_market_status(order_ids, status)
           order_ids = []
         end
@@ -145,9 +164,13 @@ module Importer::Efolio
 
     update_market_status(order_ids, status)
 
+    exception_logger.info("update_market_status end")
+
     $redis.del :note_diff_order_ids
     $redis.del :note_current_order_ids
     $redis.del :note_import_order_ids
+
+    exception_logger.info("remove_intactive_notes end")
   end
 
   def self.update_market_status(note_ids, status)
