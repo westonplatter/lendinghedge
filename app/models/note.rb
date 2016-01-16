@@ -29,6 +29,9 @@
 #
 
 class Note < ActiveRecord::Base
+  # include DataConversions
+
+  enum market_status: { active: 0, archived: 1 }
 
   belongs_to :loan, primary_key: "loan_id"
 
@@ -59,23 +62,10 @@ class Note < ActiveRecord::Base
     return x
   end
 
-  def self.compute_fico_mean(fico_range)
-    l, h = fico_range.split("-").map(&:to_i)
-    return l if (h.nil? and l > 0)
-    return h if (l.nil? and h > 0)
-    return ((h + l)/2)
-  end
-
   def self.parse_day_month_year(str)
     return nil if str.nil?
     return nil if str.empty?
     DateTime.strptime(str, '%m/%d/%Y')
-  end
-
-  def self.to_bool(x)
-    return true   if x == true   || x =~ (/(true|t|yes|y|1)$/i)
-    return false  if x == false  || x.blank? || x =~ (/(false|f|no|n|0)$/i)
-    raise ArgumentError.new("invalid value for Boolean: \"#{x}\"")
   end
 
   def self.ransack_params_from_strategy(params_hash)
@@ -85,4 +75,20 @@ class Note < ActiveRecord::Base
     }
   end
 
+  def self.tf
+    "/Users/weston/lh/lh_fast/spec/support/efolio_sample.csv"
+  end
+
+  def self.to_bool(x)
+    return true   if x == true   || x =~ (/(true|t|yes|y|1)$/i)
+    return false  if x == false  || x.blank? || x =~ (/(false|f|no|n|0)$/i)
+    raise ArgumentError.new("invalid value for Boolean: \"#{x}\"")
+  end
+
+  def self.compute_fico_mean(fico_range)
+    l, h = fico_range.split("-").map(&:to_i)
+    return l if (h.nil? and l > 0)
+    return h if (l.nil? and h > 0)
+    return ((h + l)/2)
+  end
 end

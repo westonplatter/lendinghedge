@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151227174445) do
+ActiveRecord::Schema.define(version: 20160116203220) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -102,10 +102,13 @@ ActiveRecord::Schema.define(version: 20151227174445) do
     t.integer  "remaining_payments"
     t.decimal  "principal_interest",      precision: 16, scale: 8
     t.string   "application_type"
-    t.datetime "created_at",                                       null: false
-    t.datetime "updated_at",                                       null: false
+    t.datetime "created_at",                                                   null: false
+    t.datetime "updated_at",                                                   null: false
+    t.integer  "market_status",                                    default: 0
   end
 
+  add_index "notes", ["id", "market_status"], name: "index_notes_on_id_and_market_status", using: :btree
+  add_index "notes", ["note_id", "loan_id", "order_id"], name: "index_notes_on_note_id_and_loan_id_and_order_id", using: :btree
   add_index "notes", ["note_id"], name: "index_notes_on_note_id", unique: true, using: :btree
 
   create_table "old_loans", id: false, force: :cascade do |t|
