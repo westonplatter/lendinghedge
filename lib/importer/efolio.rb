@@ -229,22 +229,26 @@ module Importer::Efolio
 
     lines = lines.collect{|l| l << created_at; l << updated_at; l << market_status }
 
-    data = lines.collect do |v|
-      # manipulation of the data into our own formats
-      if v[11].include?("-")
-        v[11] = (v[11].split("-").collect(&:to_i).inject(:+) * 1.0)/2
-      end
-
-      if v[8] == "--"
-        v[8] = nil
-      end
-
-      v
-    end.compact
+    data = lines.collect{ |x| transform_row(x) }.compact
 
     data.collect do |row|
       "(#{row.collect{|f| connection.quote(f)}.join(',')})"
     end.join(', ')
+  end
+
+  def self.transform_row(x)
+    # calc fico_mean score
+    if x[11].include?("-")
+      x[11] = (x[11].split("-").collect(&:to_i).inject(:+) * 1.0)/2
+    end
+
+    # ytm
+    x[8] = nil if x[8] == "--"
+
+    # days_since_last_payment
+    x[9] = "" if x[9].nil?
+
+    return x
   end
 
   def self.connection

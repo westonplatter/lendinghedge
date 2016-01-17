@@ -1,5 +1,5 @@
 "LoanId","NoteId","OrderId","OutstandingPrincipal","AccruedInterest","Status","AskPrice","Markup/Discount","YTM","DaysSinceLastPayment","CreditScoreTrend","FICO End Range","Date/Time Listed","NeverLate","Loan Class","Loan Maturity","Original Note Amount","Interest Rate","Remaining Payments","Principal + Interest","Application Type"
-"57124224","92788792","80662754","0.01","0.0","Late (16-30 days)","0.01","0.00","0.01","47","FLAT","710-714","11/30/2015","false","D1","36","25.0","15.61","1","0.01","INDIVIDUAL"
+"57124224","92788792","80662754","0.01","0.0","Late (16-30 days)","0.01","0.00","0.01",,"FLAT","710-714","11/30/2015","false","D1","36","25.0","15.61","1","0.01","INDIVIDUAL"
 "52321658","85072506","85129890","0.01","0.0","Late (31-120 days)","0.01","0.00","0.01","134","FLAT","715-719","11/12/2015","false","B2","36","50.0","9.17","1","0.01","INDIVIDUAL"
 "57940381","91910053","79716386","0.0","0.03","Current","97.29","324200.00","--","1","FLAT","685-689","12/01/2015","true","C1","36","100.0","12.29","1","0.03","INDIVIDUAL"
 "1009939","7013851","1985191","0.11","0.01","In Grace Period","0.1","-16.67","0.01","9","DOWN","590-594","11/30/2015","false","C5","60","25.0","15.96","0","0.12","INDIVIDUAL"
