@@ -4,7 +4,7 @@
             <!-- brand -->
             <div class="logo">
                 <a href="index.html" class="logo-expanded">
-                    <%= image_tag("lh-logo2.png") %>
+                    <!-- <%= image_tag("lh-logo2.png") %> -->
                     <span class="nav-label">LendingHedge</span>
                 </a>
             </div>
@@ -13,12 +13,10 @@
             <!-- Navbar Start -->
             <nav class="navigation">
                 <ul class="list-unstyled">
-                    <li class="has-submenu <%= active_path?(authenticated_root_path) %>"><a href="#"><i class="ion-home"></i> <span class="nav-label">Dashboard</span></a>
-                        <!-- <ul class="list-unstyled">
-                            <li class="active"><a href="index.html">Dashboard v1</a></li>
-                            <li><a href="dashboard2.html">Dashboard v2</a></li>
-                        </ul> -->
+                    <li class="<%= active_path?(authenticated_root_path) %>">
+                        <a href="#"><i class="ion-home"></i> <span class="nav-label">Dashboard</span></a>
                     </li>
+
                     <li class="has-submenu <%= active_path?(strategies_path) %>">
                         <a href="#"><i class="ion-flask"></i> <span class="nav-label">Stragies</span></a>
                         <ul class="list-unstyled">
@@ -28,7 +26,6 @@
                             <% end %>
                         </ul>
                     </li>
-
 
                     <li class="has-submenu <%= active_path?(loans_path) %>">
                         <a href="#"><i class="ion-settings"></i> <span class="nav-label">Loans</span>
@@ -40,6 +37,10 @@
                             <li><a href="">Prosper</a></li>
                             <li><a href="">FundingCircle</a></li>
                         </ul>
+                    </li>
+
+                    <li class="<%= active_path?(edit_user_registration_path) %>">
+                        <a href="<%= edit_user_registration_path %>"><i class="ion-person"></i> <span class="nav-label">Account Settings</span></a>
                     </li>
 
 

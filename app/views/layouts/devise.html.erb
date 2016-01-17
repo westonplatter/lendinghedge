@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>LendingHedge</title>
+  <%= stylesheet_link_tag 'frontend' %>
+  <%= javascript_include_tag 'frontend' %>
+  <%= csrf_meta_tags %>
+  <%= render :partial => "/shared/head" %>
+</head>
+<body>
+
+<section class="section">
+  <div class="container">
+
+    <div class="row">
+      <div class="col-sm-12">
+        <%= yield %>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
