@@ -69,14 +69,18 @@ class StrategiesController < ApplicationController
   def update_parmas
     params.require(:strategy).permit(
       :name,
-      :search_params
+      :search_params,
+      :active,
+      :execution_params,
     )
   end
 
   def new_params
     params.require(:strategy).permit(
       :name,
-      :search_params
+      :search_params,
+      :active,
+      :execution_params,
     )
   end
 

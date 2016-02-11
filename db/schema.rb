@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160116203220) do
+ActiveRecord::Schema.define(version: 20160211062549) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -191,26 +191,30 @@ ActiveRecord::Schema.define(version: 20160116203220) do
     t.integer  "user_id"
     t.string   "name"
     t.json     "search_params"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.datetime "deleted_at"
+    t.json     "execution_params"
+    t.boolean  "active"
   end
 
   add_index "strategies", ["deleted_at"], name: "index_strategies_on_deleted_at", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
+    t.string   "email",                              default: "", null: false
+    t.string   "encrypted_password",                 default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",                      default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
+    t.string   "encrypted_lending_club_investor_id"
+    t.string   "encrypted_lending_club_api_key"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

@@ -9,11 +9,13 @@ gem 'bootstrap-generators'
 
 # the rest
 gem 'annotate'
+gem 'attr_encrypted'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'devise'
 gem 'execjs'
 gem 'figaro'
 gem 'font-awesome-rails'
+gem 'i18n'
 gem 'jquery-rails'
 gem 'mechanize'
 gem 'pg'
@@ -23,11 +25,13 @@ gem 'ransack'
 gem 'rolify'
 gem 'sass-rails', '>= 3.2'
 gem 'sidekiq'
-gem 'sidekiq-rate-limiter', require:'sidekiq-rate-limiter/server'
+gem 'sidekiq-rate-limiter', require: 'sidekiq-rate-limiter/server'
 gem 'sidekiq-scheduler'
 gem 'sinatra', require: nil
 gem 'uglifier', '>= 1.3.0'
 gem 'will_paginate'
+
+gem 'lending_club', github: 'lendinghedge/lending_club'
 
 group :development do
   gem 'better_errors'

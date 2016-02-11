@@ -7,14 +7,25 @@
         <%= f.text_field :name, class: "form-control" %>
       </div>
 
-      <% value = @strategy.search_params.blank? ? [] : JSON.pretty_generate(@strategy.search_params) %>
-
+      <% search_params_value = @strategy.search_params.blank? ? [] : JSON.pretty_generate(@strategy.search_params) %>
       <div class="form-group">
         <%= f.label :search_params %>
-        <%= f.text_area :search_params, value: value, class: "form-control" %>
+        <%= f.text_area :search_params, value: search_params_value, class: "form-control" %>
+      </div>
+
+      <div class="checkbox">
+        <label>
+          <%= f.check_box :active %> Active
+        </label>
+      </div>
+
+      <% execution_params_value = @strategy.execution_params.blank? ? [] : JSON.pretty_generate(@strategy.execution_params) %>
+      <div class="form-group">
+        <%= f.label :execution_params %>
+        <%= f.text_area :execution_params, value: execution_params_value, class: "form-control" %>
       </div>
     </div>
   </div>
 
-  <%= f.submit %>
+  <%= f.submit class: "btn btn-default" %>
 <% end %>

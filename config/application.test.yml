@@ -7,3 +7,4 @@ testing:
   haha: 'haha_test'
   redis_url: 'redis://127.0.0.1:6379/11'
   devise: 489810ef3693e469212d98609c723ff1ed815d7f9d60ec13f7d150f41da07b7f3caf35ba81d274f882cc7b839aee9516dd3cd7440176ac210a0ba099e95d9d2b
+  attr_encrypted_key: 'secret'

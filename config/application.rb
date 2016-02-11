@@ -18,7 +18,7 @@ module LhFast
 
     # rspec tests automatically generated
     config.generators do |g|
-      g.test_framework :rspec, views: false
+      g.test_framework :rspec, views: false, helpers: false
     end
 
     # auto load the lib directory

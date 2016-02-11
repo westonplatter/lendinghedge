@@ -3,7 +3,7 @@
 <%= link_to("Edit", edit_strategy_path(@strategy)) %>
 <br>
 <br>
-<%= link_to("Delete", strategy_path(@strategy), method: :delete) %>
+<%= link_to("Delete", strategy_path(@strategy), method: :delete, data: { confirm: t('delete?') }) %>
 <br>
 <br>
 
