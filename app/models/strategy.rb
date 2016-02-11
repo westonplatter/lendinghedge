@@ -22,4 +22,17 @@ class Strategy < ActiveRecord::Base
   def short_name
     self.name.try(:truncate, 25)
   end
+
+  def matching_notes
+    return nil if search_params.blank?
+
+    note_ransack_params = Note.ransack_params_from_strategy(search_params)
+    Note.ransack(note_ransack_params).result(distict: true)
+  end
+
+  def matching_loans
+    return nil if search_params.blank?
+
+    Loan.ransack(search_params.to_hash).result(distict: true)
+  end
 end

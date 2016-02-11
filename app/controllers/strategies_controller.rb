@@ -7,23 +7,8 @@ class StrategiesController < ApplicationController
 
   def show
     @strategy = current_user.strategies.find(params[:id])
-
-    @loans = nil
-    @notes = nil
-
-    if !@strategy.search_params.blank?
-      @loans = Loan.
-        ransack(@strategy.search_params.to_hash).
-        result(distict: true)
-
-      note_ransack_params = Note.ransack_params_from_strategy(@strategy.search_params)
-
-      @notes = Note.
-        ransack(note_ransack_params).
-        result(distict: true)
-    else
-      nil
-    end
+    @loans = @strategy.matching_loans
+    @notes = @strategy.matching_notes
   end
 
   def new
