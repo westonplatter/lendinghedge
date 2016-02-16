@@ -25,6 +25,11 @@ class StrategiesController < ApplicationController
     end
   end
 
+  def exercise
+    NoteBuyExecutionWorker.perform_async(params[:id])
+    redirect_to(action: :show)
+  end
+
   def edit
     @strategy = current_user.strategies.find(params[:id])
   end

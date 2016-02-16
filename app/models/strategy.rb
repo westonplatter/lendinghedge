@@ -36,7 +36,9 @@ class Strategy < ActiveRecord::Base
   def matching_loans
     return nil if search_params.blank?
 
-    Loan.ransack(search_params.to_hash).result(distict: true)
+    Loan.
+      ransack(search_params.to_hash).
+      result(distict: true)
   end
 
   def max_matching_notes

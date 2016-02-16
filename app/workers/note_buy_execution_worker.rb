@@ -28,6 +28,11 @@ class NoteBuyExecutionWorker
     # make lending club api call
     result = client.efolio_buy(orders)
 
-    puts result.inspect
+    result.each do |order|
+      note = Note.where(note_id: order.note_id).first
+      unless note.nil?
+        note.update_attriubutes(market_status: Note.market_statuses[:archived])
+      end
+    end
   end
 end

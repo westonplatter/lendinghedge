@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
 
-  resources :strategies
+  resources :strategies do
+    member do
+      post :exercise
+    end
+  end
+
   resources :loans, only: [:index, :show] do
     collection do
       post :search

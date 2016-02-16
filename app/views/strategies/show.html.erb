@@ -1,11 +1,15 @@
 <h3>Show Strategy</h3>
 
-<%= link_to("Edit", edit_strategy_path(@strategy)) %>
+<%= link_to("Edit", edit_strategy_path(@strategy), class: "btn btn-default" ) %>
 <br>
 <br>
-<%= link_to("Delete", strategy_path(@strategy), method: :delete, data: { confirm: t('delete?') }) %>
+<%= link_to("Delete", strategy_path(@strategy), method: :delete, data: { confirm: t('delete?') }, class: "btn btn-default") %>
 <br>
 <br>
+<%= link_to("Exercise", exercise_strategy_path(@strategy), class: "btn btn-default") %>
+<br>
+<br>
+
 
 <!-- render the summary page -->
 
@@ -15,8 +19,9 @@ Loans: <%= @loans.try(:count) %>
 Notes: <%= @notes.try(:count) %>
 </pre>
 
-<ul>
-</ul>
+
+
+<br>
 
 <pre>
 <%= @strategy.attributes.to_yaml %>
