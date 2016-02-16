@@ -14,10 +14,10 @@
 #
 
 class Strategy < ActiveRecord::Base
-  belongs_to :user
-
   resourcify
   acts_as_paranoid
+
+  belongs_to :user
 
   def short_name
     self.name.try(:truncate, 25)
@@ -34,5 +34,12 @@ class Strategy < ActiveRecord::Base
     return nil if search_params.blank?
 
     Loan.ransack(search_params.to_hash).result(distict: true)
+  end
+
+  def max_matching_notes
+    max_invest = execution_params["max_invest"]
+    sum = 0
+
+    matching_notes.limit(10).select{|x| sum += x.ask_price; sum <= max_invest }
   end
 end
