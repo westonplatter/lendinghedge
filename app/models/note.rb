@@ -71,20 +71,28 @@ class Note < ActiveRecord::Base
       DateTime.strptime(str, '%m/%d/%Y')
     end
 
+    MAPPINGS_HASH = {
+      # loan attributes
+      "loan_dti_gteq"         => "dti_gteq",
+      "loan_dti_lteq"         => "dti_lteq",
+      "loan_revol_util_gteq"  => "revol_util_gteq",
+      "loan_revol_util_lteq"  => "revol_util_lteq",
+
+      # note attributes
+      "outstanding_principal_lteq"  => "outstanding_principal_lteq",
+      "never_late"                  => "never_late",
+      "markup_discount_lteq"        => "markup_discount_lteq",
+      "markup_discount_gteq"        => "markup_discount_gteq",
+      "original_note_amount_lteq"   => "original_note_amount_lteq",
+      "original_note_amount_gteq"   => "original_note_amount_gteq",
+      "interest_rate_lteq"          => "interest_rate_lteq",
+      "interest_rategteq"           => "interest_rate_lteq",
+    }
+
     def ransack_params_from_strategy(params_hash)
-
-      mappings = {
-        # loan attributes
-        "loan_dti_gteq" => "dti_gteq",
-        "loan_dti_lteq" => "dti_lteq",
-
-        # note attributes
-        "outstanding_principal_lteq" => "outstanding_principal_lteq"
-      }
-
       hash = {}
 
-      mappings.each do |k,v|
+      MAPPINGS_HASH.each do |k,v|
         hash[k] = params_hash[v] if !params_hash[v].nil?
       end
 
