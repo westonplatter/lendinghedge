@@ -27,7 +27,10 @@ class Strategy < ActiveRecord::Base
     return nil if search_params.blank?
 
     note_ransack_params = Note.ransack_params_from_strategy(search_params)
-    Note.ransack(note_ransack_params).result(distict: true)
+    Note.
+      where(market_status: Note.market_statuses[:active]).
+      ransack(note_ransack_params).
+      result(distict: true)
   end
 
   def matching_loans
