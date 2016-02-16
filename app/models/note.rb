@@ -80,13 +80,13 @@ class Note < ActiveRecord::Base
 
       # note attributes
       "outstanding_principal_lteq"  => "outstanding_principal_lteq",
-      "never_late"                  => "never_late",
+      "never_late_eq"               => "never_late_eq",
       "markup_discount_lteq"        => "markup_discount_lteq",
       "markup_discount_gteq"        => "markup_discount_gteq",
       "original_note_amount_lteq"   => "original_note_amount_lteq",
       "original_note_amount_gteq"   => "original_note_amount_gteq",
       "interest_rate_lteq"          => "interest_rate_lteq",
-      "interest_rategteq"           => "interest_rate_lteq",
+      "interest_rate_gteq"          => "interest_rate_gteq",
     }
 
     def ransack_params_from_strategy(params_hash)
