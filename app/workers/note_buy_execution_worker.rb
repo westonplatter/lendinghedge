@@ -23,7 +23,6 @@ class NoteBuyExecutionWorker
 
     investor_id = user.lending_club_investor_id
     return if investor_id.nil?
-    # order_collection = LendingClub::EfolioOrderCollection.new(orders, investor_id)
 
     # make lending club api call
     result = client.efolio_buy(orders)
@@ -31,7 +30,7 @@ class NoteBuyExecutionWorker
     result.each do |order|
       note = Note.where(note_id: order.note_id).first
       unless note.nil?
-        note.update_attriubutes(market_status: Note.market_statuses[:archived])
+        note.update_attributes(market_status: Note.market_statuses[:archived])
       end
     end
   end
