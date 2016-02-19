@@ -103,6 +103,10 @@ module Importer::Efolio
   #
   def self.remove_intactive_notes(full_file_path)
 
+    sql = "TRUNCATE notes"
+    connection.execute(sql)
+    return
+
     i = 0
 
     # co, current orders
