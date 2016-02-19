@@ -29,7 +29,7 @@ class StrategiesController < ApplicationController
     note = Note.find_by(note_id: params[:note_id])
 
     if note.archived!
-      NoteBuyExecutionWorker.perform_async(params[:note_id])
+      NoteBuyExecutionWorker.perform_async(current_user.id, params[:note_id])
     end
 
     redirect_to(action: :show)

@@ -6,11 +6,11 @@ class NoteBuyExecutionWorker
     :retry => false,
     :backtrace => true
 
-  def perform(note_id)
+  def perform(user_id, note_id)
     # strategy = Strategy.find(strategy_id)
 
     # initialize the LC client
-    user = strategy.user
+    user = User.find(user_id)
     options = {
       access_token: user.lending_club_access_token,
       investor_id: user.lending_club_investor_id,
