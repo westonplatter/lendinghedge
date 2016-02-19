@@ -104,6 +104,7 @@ module Importer::Efolio
   def self.remove_intactive_notes(full_file_path)
 
     Note.delete_all
+    return
 
     i = 0
 
