@@ -36,7 +36,23 @@ class Note < ActiveRecord::Base
 
   belongs_to :loan, primary_key: "loan_id"
 
-  delegate :dti, :annual_inc, :purpose, :revol_util, to: :loan
+  # delegate :dti, :annual_inc, :purpose, :revol_util, to: :loan
+
+  def dti
+    loan.try(:dti)
+  end
+
+  def annual_inc
+    loan.try(:annual_inc)
+  end
+
+  def purpose
+    loan.try(:purpose)
+  end
+
+  def revol_util
+    loan.try(:revol_util)
+  end
 
   class << self
     def parse_csv_row(row)
