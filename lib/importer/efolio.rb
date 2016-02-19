@@ -103,9 +103,7 @@ module Importer::Efolio
   #
   def self.remove_intactive_notes(full_file_path)
 
-    sql = "TRUNCATE notes"
-    connection.execute(sql)
-    return
+    Note.delete_all
 
     i = 0
 
