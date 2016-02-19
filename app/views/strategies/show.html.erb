@@ -1,28 +1,49 @@
 <h3>Show Strategy</h3>
 
 <%= link_to("Edit", edit_strategy_path(@strategy), class: "btn btn-default" ) %>
-<br>
-<br>
 <%= link_to("Delete", strategy_path(@strategy), method: :delete, data: { confirm: t('delete?') }, class: "btn btn-default") %>
-<br>
-<br>
 <%= link_to("Exercise", exercise_strategy_path(@strategy), method: :post, class: "btn btn-default") %>
+
+<br><br>
+<h5>Attributes</h5>
+<pre>
+<%= @strategy.attributes.to_yaml %>
+</pre>
+
 <br>
-<br>
-
-
-<!-- render the summary page -->
-
 <h5>Results Strategy</h5>
 <pre>
 Loans: <%= @loans.try(:count) %>
 Notes: <%= @notes.try(:count) %>
 </pre>
 
-
-
 <br>
 
-<pre>
-<%= @strategy.attributes.to_yaml %>
-</pre>
+<table class="table table-striped">
+  <thead>
+    <th>Actions</th>
+    <th>Note Id</th>
+    <th>Loan Id</th>
+    <th>ytm</th>
+    <th>fico_end_range_mean</th>
+    <th>DTI</th>
+    <th>Annual Income</th>
+    <th>Purpose</th>
+    <th>Revolving Utilization</th>
+  </thead>
+  <tbody>
+    <% @notes.order('ytm desc').limit(100).each do |x| %>
+      <tr>
+        <td><%= link_to "Buy", buy_note_strategy_path(@strategy, {note_id: x.note_id}), method: :post, class: "btn btn-default" %></td>
+        <td><%= x.note_id %></td>
+        <td><%= x.loan_id %></td>
+        <td><%= x.ytm %></td>
+        <td><%= x.fico_end_range_mean %></td>
+        <td><%= x.dti %></td>
+        <td><%= x.annual_inc %></td>
+        <td><%= x.purpose %></td>
+        <td><%= x.revol_util %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

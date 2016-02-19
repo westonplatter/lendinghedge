@@ -45,6 +45,9 @@ class Strategy < ActiveRecord::Base
     max_invest = execution_params["max_invest"]
     sum = 0
 
-    matching_notes.limit(10).select{|x| sum += x.ask_price; sum <= max_invest }
+    matching_notes.
+      order(:markup_discount).
+      limit(10).
+      select{|x| sum += x.ask_price; sum <= max_invest }
   end
 end

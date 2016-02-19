@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :strategies do
     member do
       post :exercise
+      post :buy_note
     end
   end
 

@@ -36,6 +36,8 @@ class Note < ActiveRecord::Base
 
   belongs_to :loan, primary_key: "loan_id"
 
+  delegate :dti, :annual_inc, :purpose, :revol_util, to: :loan
+
   class << self
     def parse_csv_row(row)
       x = Note.new(
@@ -77,6 +79,8 @@ class Note < ActiveRecord::Base
       "loan_dti_lteq"         => "dti_lteq",
       "loan_revol_util_gteq"  => "revol_util_gteq",
       "loan_revol_util_lteq"  => "revol_util_lteq",
+      "loan_fico_mean_gteq"   => "fico_mean_gteq",
+      "loan_fico_mean_lteq"   => "fico_mean_lteq",
 
       # note attributes
       "outstanding_principal_lteq"  => "outstanding_principal_lteq",

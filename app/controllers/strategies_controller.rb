@@ -25,6 +25,16 @@ class StrategiesController < ApplicationController
     end
   end
 
+  def buy_note
+    note = Note.find_by(note_id: params[:note_id])
+
+    if note.archived!
+      NoteBuyExecutionWorker.perform_async(params[:note_id])
+    end
+
+    redirect_to(action: :show)
+  end
+
   def exercise
     NoteBuyExecutionWorker.perform_async(params[:id])
     redirect_to(action: :show)

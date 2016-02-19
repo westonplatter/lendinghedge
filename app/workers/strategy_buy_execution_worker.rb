@@ -1,4 +1,4 @@
-class NoteBuyExecutionWorker
+class StrategyBuyExecutionWorker
   include Sidekiq::Worker
 
   sidekiq_options \
@@ -6,8 +6,8 @@ class NoteBuyExecutionWorker
     :retry => false,
     :backtrace => true
 
-  def perform(note_id)
-    # strategy = Strategy.find(strategy_id)
+  def perform(strategy_id)
+    strategy = Strategy.find(strategy_id)
 
     # initialize the LC client
     user = strategy.user
@@ -18,20 +18,19 @@ class NoteBuyExecutionWorker
     client = LendingClub::Client.new(options)
 
     # initialize the Efolio Order Collection
-    note = Note.find_by(note_id: note_id)
-    orders = [note.init_lc_efolio_order]
+    notes = strategy.max_matching_notes
+    orders = notes.collect{|x| x.init_lc_efolio_order }
 
-    # ensure investor id
     investor_id = user.lending_club_investor_id
     return if investor_id.nil?
 
     # make lending club api call
     result = client.efolio_buy(orders)
 
-    # remove notes available notes pool
     result.each do |order|
       note = Note.find_by(note_id: order.note_id)
       note.archived!
     end
   end
+
 end
