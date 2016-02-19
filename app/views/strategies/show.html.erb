@@ -33,19 +33,21 @@ Notes: <%= @notes.try(:count) %>
     <th>Markup/Discount</th>
   </thead>
   <tbody>
-    <% @notes.order('ytm desc').limit(100).each do |x| %>
-      <tr>
-        <td><%= link_to "Buy", buy_note_strategy_path(@strategy, {note_id: x.note_id}), method: :post, class: "btn btn-default" %></td>
-        <td><%= x.note_id %></td>
-        <td><%= x.loan_id %></td>
-        <td><%= x.ytm %></td>
-        <td><%= x.fico_end_range_mean %></td>
-        <td><%= x.dti %></td>
-        <td><%= x.annual_inc %></td>
-        <td><%= x.purpose %></td>
-        <td><%= x.revol_util %></td>
-        <td><%= x.markup_discount %></td>
-      </tr>
+    <% unless @notes.nil? %>
+      <% @notes.order('ytm desc').limit(100).each do |x| %>
+        <tr>
+          <td><%= link_to "Buy", buy_note_strategy_path(@strategy, {note_id: x.note_id}), method: :post, class: "btn btn-default" %></td>
+          <td><%= x.note_id %></td>
+          <td><%= x.loan_id %></td>
+          <td><%= x.ytm %></td>
+          <td><%= x.fico_end_range_mean %></td>
+          <td><%= x.dti %></td>
+          <td><%= x.annual_inc %></td>
+          <td><%= x.purpose %></td>
+          <td><%= x.revol_util %></td>
+          <td><%= x.markup_discount %></td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
