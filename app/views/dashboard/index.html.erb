@@ -1,3 +1,14 @@
 <% @accounts.each do |account| %>
-  <%= account.to_yaml %>
+  <pre>
+    <%= account.available_cash %>
+    <%= account.accrued_interest %>
+    <%= account.outstanding_principal %>
+    <%= account.account_total %>
+    <%= account.total_notes %>
+    <%= account.total_portfolios %>
+    <%= account.in_funding_balance %>
+    <%= account.received_interest %>
+    <%= account.received_principal %>
+    <%= account.received_late_fees %>
+  </pre>
 <% end %>
