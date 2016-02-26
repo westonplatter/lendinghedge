@@ -196,6 +196,9 @@ module Importer::Efolio
     File.delete(file)
   end
 
+  #
+  # buy notes
+  #
   def self.execute_active_strategies
     Strategy.where(active: true).each {|x| StrategyBuyExecutionWorker.perform_async(x.id) }
   end
