@@ -14,7 +14,7 @@
             <nav class="navigation">
                 <ul class="list-unstyled">
                     <li class="<%= active_path?(authenticated_root_path) %>">
-                        <a href="#"><i class="ion-home"></i> <span class="nav-label">Dashboard</span></a>
+                        <a href="<%= authenticated_root_path %>"><i class="ion-home"></i> <span class="nav-label">Dashboard</span></a>
                     </li>
 
                     <li class="has-submenu <%= active_path?(strategies_path) %>">

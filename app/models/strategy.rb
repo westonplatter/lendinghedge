@@ -27,6 +27,7 @@ class Strategy < ActiveRecord::Base
     return nil if search_params.blank?
 
     note_ransack_params = Note.ransack_params_from_strategy(search_params)
+
     Note.
       where(market_status: Note.market_statuses[:active]).
       ransack(note_ransack_params).
@@ -44,6 +45,8 @@ class Strategy < ActiveRecord::Base
   def max_matching_notes
     max_invest = execution_params["max_invest"]
     sum = 0
+
+    return nil if matching_notes.nil?
 
     matching_notes.
       order(:markup_discount).

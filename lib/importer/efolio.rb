@@ -96,6 +96,8 @@ module Importer::Efolio
     store(lines) unless lines.empty?
 
     cleanup(file)
+
+    execute_active_strategies
   end
 
   #
@@ -190,11 +192,11 @@ module Importer::Efolio
   #
   # cleanup
   #
-  def cleanup(file)
+  def self.cleanup(file)
     File.delete(file)
   end
 
-  def execute_active_strategies
+  def self.execute_active_strategies
     Strategy.where(active: true).each {|x| StrategyBuyExecutionWorker.perform_async(x.id) }
   end
 
