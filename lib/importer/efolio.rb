@@ -194,6 +194,10 @@ module Importer::Efolio
     File.delete(file)
   end
 
+  def execute_active_strategies
+    Strategy.where(active: true).each {|x| StrategyBuyExecutionWorker.perform_async(x.id) }
+  end
+
   def self.exception_logger
     @@exception_logger ||= Logger.new("#{Rails.root}/log/import_logger.log")
   end
