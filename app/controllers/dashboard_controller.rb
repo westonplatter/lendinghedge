@@ -11,7 +11,7 @@ class DashboardController < ApplicationController
       }
       client = LendingClub::Client.new(options)
 
-      accounts << client.summary
+      @accounts << client.summary
     end
   end
 end
