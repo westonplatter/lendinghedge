@@ -99,6 +99,8 @@ class Note < ActiveRecord::Base
       "loan_fico_mean_lteq"   => "fico_mean_lteq",
       "loan_annual_inc_gteq"  => "annual_inc_gteq",
       "loan_annual_inc_lteq"  => "annual_inc_lteq",
+      "loan_purpose_cont"     => "purpose_cont",
+      "loan_purpose_not_cont" => "purpose_not_cont",
 
       # note attributes
       "outstanding_principal_gteq"      => "outstanding_principal_gteq",
