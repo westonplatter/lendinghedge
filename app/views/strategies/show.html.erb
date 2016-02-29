@@ -25,6 +25,7 @@ Notes: <%= @notes.try(:count) %>
     <th>Note Id</th>
     <th>Loan Id</th>
     <th>loan_class</th>
+    <th>interest_rate</th>
     <th>ytm</th>
     <th>fico_end_range_mean</th>
     <th>dti</th>
@@ -41,6 +42,7 @@ Notes: <%= @notes.try(:count) %>
           <td><%= x.note_id %></td>
           <td><%= x.loan_id %></td>
           <td><%= x.loan_class %></td>
+          <td><%= x.interest_rate %></td>
           <td><%= x.ytm %></td>
           <td><%= x.fico_end_range_mean %></td>
           <td><%= x.dti %></td>
