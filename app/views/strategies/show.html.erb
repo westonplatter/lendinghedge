@@ -24,9 +24,10 @@ Notes: <%= @notes.try(:count) %>
     <th>Actions</th>
     <th>Note Id</th>
     <th>Loan Id</th>
+    <th>loan_class</th>
     <th>ytm</th>
     <th>fico_end_range_mean</th>
-    <th>DTI</th>
+    <th>dti</th>
     <th>Annual Income</th>
     <th>Purpose</th>
     <th>Revolving Utilization</th>
@@ -39,6 +40,7 @@ Notes: <%= @notes.try(:count) %>
           <td><%= link_to "Buy", buy_note_strategy_path(@strategy, {note_id: x.note_id}), method: :post, class: "btn btn-default" %></td>
           <td><%= x.note_id %></td>
           <td><%= x.loan_id %></td>
+          <td><%= x.loan_class %></td>
           <td><%= x.ytm %></td>
           <td><%= x.fico_end_range_mean %></td>
           <td><%= x.dti %></td>
