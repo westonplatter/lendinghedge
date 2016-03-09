@@ -98,6 +98,7 @@ class Note < ActiveRecord::Base
       "loan_int_rate_lteq"    => "int_rate_gteq",
       "loan_int_rate_lteq"    => "int_rate_gteq",
       "loan_purpose_cont"     => "purpose_cont",
+      "loan_purpose_not_cont" => "purpose_not_cont",
       "loan_pub_rec_lteq"     => "pub_rec_lteq",
       "loan_pub_rec_gteq"     => "pub_rec_gteq",
       "loan_dti_gteq"         => "dti_gteq",
