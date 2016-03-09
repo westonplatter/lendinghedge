@@ -34,4 +34,8 @@ class User < ActiveRecord::Base
     key: ENV['attr_encrypted_key']
 
   has_many :strategies
+
+  def admin?
+    self.admin == true
+  end
 end
