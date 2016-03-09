@@ -91,6 +91,15 @@ class Note < ActiveRecord::Base
 
     MAPPINGS_HASH = {
       # loan attributes
+      "loan_amnt_lteq"        => "amnt_lteq",
+      "loan_amnt_gteq"        => "amnt_gteq",
+      "loan_term_lteq"        => "term_lteq",
+      "loan_term_gteq"        => "term_gteq",
+      "loan_int_rate_lteq"    => "int_rate_gteq",
+      "loan_int_rate_lteq"    => "int_rate_gteq",
+      "loan_purpose_cont"     => "purpose_cont",
+      "loan_pub_rec_lteq"     => "pub_rec_lteq",
+      "loan_pub_rec_gteq"     => "pub_rec_gteq",
       "loan_dti_gteq"         => "dti_gteq",
       "loan_dti_lteq"         => "dti_lteq",
       "loan_revol_util_gteq"  => "revol_util_gteq",
