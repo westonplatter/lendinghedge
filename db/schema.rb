@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160309012817) do
+ActiveRecord::Schema.define(version: 20160317000859) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -110,6 +110,33 @@ ActiveRecord::Schema.define(version: 20160309012817) do
   add_index "notes", ["id", "market_status"], name: "index_notes_on_id_and_market_status", using: :btree
   add_index "notes", ["note_id", "loan_id", "order_id"], name: "index_notes_on_note_id_and_loan_id_and_order_id", using: :btree
   add_index "notes", ["note_id"], name: "index_notes_on_note_id", unique: true, using: :btree
+
+  create_table "notes_ts", force: :cascade do |t|
+    t.integer  "loan_id"
+    t.integer  "note_id"
+    t.integer  "order_id"
+    t.decimal  "outstanding_principal",   precision: 16, scale: 8
+    t.decimal  "accrued_interest",        precision: 16, scale: 8
+    t.string   "status"
+    t.decimal  "ask_price",               precision: 16, scale: 8
+    t.decimal  "markup_discount",         precision: 16, scale: 8
+    t.decimal  "ytm",                     precision: 16, scale: 8
+    t.integer  "days_since_last_payment"
+    t.string   "credit_score_trend"
+    t.decimal  "fico_end_range_mean",     precision: 16, scale: 8
+    t.datetime "datetime_listed"
+    t.boolean  "never_late"
+    t.string   "loan_class"
+    t.integer  "loan_maturity"
+    t.decimal  "original_note_amount",    precision: 16, scale: 8
+    t.decimal  "interest_rate",           precision: 16, scale: 8
+    t.integer  "remaining_payments"
+    t.decimal  "principal_interest",      precision: 16, scale: 8
+    t.string   "application_type"
+    t.datetime "created_at",                                                   null: false
+    t.datetime "updated_at",                                                   null: false
+    t.integer  "market_status",                                    default: 0
+  end
 
   create_table "old_loans", id: false, force: :cascade do |t|
     t.integer  "loan_id",                                     null: false

@@ -17,6 +17,12 @@
 #  last_sign_in_ip                     :inet
 #  encrypted_lending_club_investor_id  :string
 #  encrypted_lending_club_access_token :string
+#  admin                               :boolean
+#
+# Indexes
+#
+#  index_users_on_email                 (email) UNIQUE
+#  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 
 class User < ActiveRecord::Base

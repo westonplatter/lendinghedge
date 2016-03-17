@@ -63,6 +63,10 @@
 #  updated_at                  :datetime         not null
 #  fico_mean                   :integer
 #
+# Indexes
+#
+#  index_loans_on_loan_id  (loan_id)
+#
 
 class Loan < ActiveRecord::Base
 

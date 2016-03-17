@@ -11,6 +11,7 @@ gem 'bootstrap-generators'
 gem 'annotate'
 gem 'attr_encrypted'
 gem 'coffee-rails', '~> 4.0.0'
+gem 'database_cleaner'
 gem 'devise'
 gem 'execjs'
 gem 'figaro'
@@ -31,6 +32,7 @@ gem 'sidekiq-scheduler'
 gem 'sinatra', require: nil
 gem 'uglifier', '>= 1.3.0'
 gem 'will_paginate'
+
 
 gem 'lending_club', github: 'lendinghedge/lending_club'
 

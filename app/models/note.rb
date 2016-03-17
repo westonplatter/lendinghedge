@@ -28,6 +28,12 @@
 #  updated_at              :datetime         not null
 #  market_status           :integer          default(0)
 #
+# Indexes
+#
+#  index_notes_on_id_and_market_status              (id,market_status)
+#  index_notes_on_note_id                           (note_id) UNIQUE
+#  index_notes_on_note_id_and_loan_id_and_order_id  (note_id,loan_id,order_id)
+#
 
 class Note < ActiveRecord::Base
   # include DataConversions
@@ -66,7 +72,7 @@ class Note < ActiveRecord::Base
         ask_price: row["AskPrice"],
         markup_discount: row["Markup/Discount"],
         ytm: row["YTM"],
-        days_since_last_payment: row["DaysSinceLastPayment"],
+        days_since_last_payment: row["DaysSinceLastPayment"].to_i,
         credit_score_trend: row["CreditScoreTrend"],
         fico_end_range_mean: compute_fico_mean(row["FICO End Range"]),
         datetime_listed: parse_day_month_year(row["Date/Time Listed"]),
@@ -95,10 +101,8 @@ class Note < ActiveRecord::Base
       "loan_amnt_gteq"        => "amnt_gteq",
       "loan_term_lteq"        => "term_lteq",
       "loan_term_gteq"        => "term_gteq",
+      "loan_int_rate_gteq"    => "int_rate_gteq",
       "loan_int_rate_lteq"    => "int_rate_gteq",
-      "loan_int_rate_lteq"    => "int_rate_gteq",
-      "loan_purpose_cont"     => "purpose_cont",
-      "loan_purpose_not_cont" => "purpose_not_cont",
       "loan_pub_rec_lteq"     => "pub_rec_lteq",
       "loan_pub_rec_gteq"     => "pub_rec_gteq",
       "loan_dti_gteq"         => "dti_gteq",

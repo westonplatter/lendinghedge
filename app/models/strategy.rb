@@ -12,6 +12,10 @@
 #  execution_params :json
 #  active           :boolean
 #
+# Indexes
+#
+#  index_strategies_on_deleted_at  (deleted_at)
+#
 
 class Strategy < ActiveRecord::Base
   resourcify
