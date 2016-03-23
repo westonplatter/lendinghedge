@@ -5,6 +5,24 @@
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= csrf_meta_tags %>
   <%= render :partial => "/shared/head" %>
+
+  <script>
+    !function(){var e=window._ramen=window._ramen||[];if(!e.initialize){if(e.invoked)return void(window.console&&console.error&&console.error("Ramen snippet included twice."));e.invoked=!0,e.methods=["boot","ready","identify","group","track","page","reset","ask"],e.factory=function(r){return function(){var t=Array.prototype.slice.call(arguments);return t.unshift(r),e.push(t),e}};for(var r=0;r<e.methods.length;r++){var t=e.methods[r];e[t]=e.factory(t)}var n=document.createElement("script");n.type="text/javascript",n.async=!0,n.src="https://staging-cdn.ramen.is/assets/ramen.js";var o=document.getElementsByTagName("script")[0];o.parentNode.insertBefore(n,o)}}();
+
+    _ramen.boot('56f304e064623633f02b0000');
+    _ramen.identify()
+
+    // 😻 If you want to identify logged in users, you'll need to have a
+    // developer take a look at everything below this line
+    //
+    // _ramen.identify({
+    //   id: "12345-replace", // Replace with a unique user ID. Could be their email
+    //   email: "customer@example.com", // Replace with their email address
+    //   name: "Bugs Bunny" // Replace with their name
+    // });
+
+    // Check out our options at http://docs.ramen.is/
+  </script>
 </head>
 
 <body>
