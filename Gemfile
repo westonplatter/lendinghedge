@@ -33,17 +33,10 @@ gem 'sinatra', require: nil
 gem 'uglifier', '>= 1.3.0'
 gem 'will_paginate'
 
-
 gem 'lending_club', github: 'lendinghedge/lending_club'
 
 group :development do
   gem 'better_errors'
-  gem 'capistrano', '~> 3.1'
-  gem 'capistrano-bundler', '~> 1.1.2'
-  gem 'capistrano-sidekiq'
-  gem 'capistrano-rails', '~> 1.1'
-  gem 'capistrano-rbenv', '~> 2.0'
-  gem 'capistrano3-puma', github: 'seuros/capistrano-puma'
   gem 'guard-rspec'
   gem 'guard-zeus'
   gem 'quiet_assets'
@@ -58,4 +51,11 @@ group :development, :test do
   gem 'capybara'
   gem 'factory_girl_rails'
   gem 'rspec-rails'
+
+  gem 'capistrano', '~> 3.1'
+  gem 'capistrano-bundler', '~> 1.1.2'
+  gem 'capistrano-sidekiq'
+  gem 'capistrano-rails', '~> 1.1'
+  gem 'capistrano-rbenv', '~> 2.0'
+  gem 'capistrano3-puma', github: 'seuros/capistrano-puma'
 end

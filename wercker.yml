@@ -1,4 +1,4 @@
-box: phusion/passenger-ruby22
+box: westonplatter/westonplatter/ruby-nodejs-postgres
 
 # You can also use services such as databases. Read more on our dev center:
 # http://devcenter.wercker.com/docs/services/index.html

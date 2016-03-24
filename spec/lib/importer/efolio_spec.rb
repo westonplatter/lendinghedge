@@ -1,20 +1,11 @@
 require "rails_helper"
 
-describe Importer::Efolio do
+RSpec.describe Importer::Efolio do
 
   let(:klass) { Importer::Efolio }
 
   describe "import" do
-    it "test file" do
-      file = Rails.root.join("spec/support/efolio_sample.csv")
-
-      allow(Importer::Efolio).to receive(:remove_intactive_notes)
-      allow(Importer::Efolio).to receive(:cleanup)
-
-      Importer::Efolio.import(file)
-    end
-
-    it "should create 9 records in each table" do
+    it "should create 3 records in each table" do
       file = Rails.root.join("spec/support/efolio_sample.csv")
 
       allow(Importer::Efolio).to receive(:remove_intactive_notes)
@@ -22,8 +13,8 @@ describe Importer::Efolio do
 
       Importer::Efolio.import(file)
 
-      expect(Note.count).to eq(9)
-      expect(NoteTs.count).to eq(9)
+      expect(Note.count).to eq(3)
+      expect(NoteTs.count).to eq(3)
     end
   end
 

@@ -1,0 +1,13 @@
+now
+
+- get time series working
+
+
+short term
+
+- setup cd with wercker
+
+
+long term
+
+
