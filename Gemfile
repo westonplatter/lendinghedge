@@ -58,4 +58,5 @@ group :development, :test do
   gem 'capistrano-rails', '~> 1.1'
   gem 'capistrano-rbenv', '~> 2.0'
   gem 'capistrano3-puma', github: 'seuros/capistrano-puma'
+  gem 'slackistrano'
 end
