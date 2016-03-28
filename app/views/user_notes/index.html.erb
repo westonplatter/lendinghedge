@@ -1,0 +1,33 @@
+<h3>Index Strategy</h3>
+
+<br>
+
+<table class="table table-striped">
+  <thead>
+    <th>Action</th>
+    <th>Price Point</th>
+    <th>Grade</th>
+    <th>Interest Rate</th>
+    <th>Note Amount</th>
+    <th>Purpose</th>
+    <th>Loan Length</th>
+    <th>Can Be Traded</th>
+  </thead>
+
+  <tbody>
+    <% @user_notes.each do |x| %>
+      <%= form_for(x, :url => { :action => :sell, id: x.id }) do |f| %>
+        <tr>
+          <td><%= f.submit "Sell" %></td>
+          <td><%= f.text_field :sell_price %></td>
+          <td><%= x.grade %></td>
+          <td><%= x.interest_rate %></td>
+          <td><%= x.note_amount.to_s %></td>
+          <td><%= x.purpose %></td>
+          <td><%= x.loan_length %></td>
+          <td><%= x.can_be_traded %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

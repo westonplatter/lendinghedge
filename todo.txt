@@ -1,7 +1,8 @@
 now
 
-- get time series working
-
+- download user notes
+- sell notes
+- calculate sell price based on market averages
 
 short term
 

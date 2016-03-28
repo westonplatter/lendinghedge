@@ -41,6 +41,8 @@ class User < ActiveRecord::Base
 
   has_many :strategies
 
+  has_many :user_notes
+
   def admin?
     self.admin == true
   end

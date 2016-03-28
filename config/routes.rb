@@ -13,6 +13,15 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :user_notes, only: [:index] do
+    collection do
+      post :import
+    end
+    member do
+      post :sell
+    end
+  end
+
   devise_for :users, controllers: {
     :registrations => "users/registrations"
   }

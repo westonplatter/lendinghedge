@@ -11,10 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160317000859) do
+ActiveRecord::Schema.define(version: 20160328113753) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "citext"
+  enable_extension "hstore"
+  enable_extension "uuid-ossp"
 
   create_table "loans", force: :cascade do |t|
     t.integer  "loan_id"
@@ -138,6 +141,71 @@ ActiveRecord::Schema.define(version: 20160317000859) do
     t.integer  "market_status",                                    default: 0
   end
 
+  create_table "old_loans", id: false, force: :cascade do |t|
+    t.integer  "loan_id",                                     null: false
+    t.integer  "member_id"
+    t.float    "loan_amount"
+    t.float    "funded_amount"
+    t.float    "funded_amount_invested"
+    t.integer  "term"
+    t.float    "interest_rate"
+    t.float    "installment"
+    t.string   "grade",                           limit: 255
+    t.string   "sub_grade",                       limit: 255
+    t.string   "employment_title",                limit: 255
+    t.string   "employment_length",               limit: 255
+    t.string   "home_ownership",                  limit: 255
+    t.float    "annual_income"
+    t.integer  "income_is_verfied"
+    t.string   "issue_date",                      limit: 255
+    t.integer  "loan_status"
+    t.string   "payment_plan",                    limit: 255
+    t.string   "url",                             limit: 255
+    t.text     "description"
+    t.string   "purpose",                         limit: 255
+    t.string   "title",                           limit: 255
+    t.string   "zip_code",                        limit: 255
+    t.string   "address_state",                   limit: 255
+    t.float    "dti"
+    t.integer  "delinquencies2_years"
+    t.string   "earliest_credit_line",            limit: 255
+    t.integer  "fico_range_low"
+    t.integer  "fico_range_high"
+    t.integer  "inquiries_last6_months"
+    t.integer  "months_since_last_inquiry"
+    t.integer  "months_since_last_delinquency"
+    t.integer  "months_since_last_record"
+    t.integer  "open_accounts"
+    t.integer  "public_records"
+    t.float    "revolving_balance"
+    t.float    "revolving_utilization"
+    t.integer  "total_accounts"
+    t.integer  "initial_list_status"
+    t.float    "outstanding_principal"
+    t.float    "outstanding_principal_invested"
+    t.float    "total_payment"
+    t.float    "total_payment_invested"
+    t.float    "total_received_principal"
+    t.float    "total_received_interest"
+    t.float    "total_received_late_fees"
+    t.float    "recoveries"
+    t.float    "collection_recovery_fees"
+    t.string   "last_payment_date",               limit: 255
+    t.float    "last_payment_amount"
+    t.string   "next_payment_date",               limit: 255
+    t.string   "last_credit_pull_date",           limit: 255
+    t.integer  "last_fico_range_high"
+    t.integer  "last_fico_range_low"
+    t.integer  "collections12_excluding_medical"
+    t.integer  "months_since_last_major_derog"
+    t.datetime "updated_at",                                  null: false
+    t.datetime "created_at",                                  null: false
+    t.string   "policy_code",                     limit: 255
+  end
+
+  add_index "old_loans", ["loan_id"], name: "index_loans_loan_id", using: :btree
+  add_index "old_loans", ["loan_id"], name: "loans_loan_id", using: :btree
+
   create_table "roles", force: :cascade do |t|
     t.string   "name"
     t.integer  "resource_id"
@@ -161,6 +229,38 @@ ActiveRecord::Schema.define(version: 20160317000859) do
   end
 
   add_index "strategies", ["deleted_at"], name: "index_strategies_on_deleted_at", using: :btree
+
+  create_table "user_notes", force: :cascade do |t|
+    t.string   "loan_status"
+    t.integer  "loan_id"
+    t.string   "portfolio_name"
+    t.integer  "portfolio_id"
+    t.integer  "note_id"
+    t.string   "grade"
+    t.decimal  "loan_amount",            precision: 16, scale: 8
+    t.decimal  "accrued_interest",       precision: 16, scale: 8
+    t.decimal  "note_amount",            precision: 16, scale: 8
+    t.string   "purpose"
+    t.integer  "order_id"
+    t.integer  "loan_length"
+    t.datetime "issue_date"
+    t.datetime "order_date"
+    t.datetime "loan_status_date"
+    t.string   "credit_trend"
+    t.string   "current_payment_status"
+    t.boolean  "can_be_traded"
+    t.decimal  "payments_received",      precision: 16, scale: 8
+    t.datetime "next_payment_date"
+    t.decimal  "principal_pending",      precision: 16, scale: 8
+    t.decimal  "interest_pending",       precision: 16, scale: 8
+    t.decimal  "interest_received",      precision: 16, scale: 8
+    t.decimal  "principal_received",     precision: 16, scale: 8
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
+    t.integer  "user_id"
+    t.decimal  "interest_rate",          precision: 16, scale: 8
+    t.decimal  "sell_price",             precision: 16, scale: 8
+  end
 
   create_table "users", force: :cascade do |t|
     t.datetime "created_at",                                       null: false
