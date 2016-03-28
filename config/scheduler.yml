@@ -8,7 +8,7 @@ DownloadEfolioWorker:
 
 # runs 6:00am
 ScheduleBuyExecutions:
-  cron: "0 6 * * * America/Denver"
+  cron: "45 5 * * * America/Denver"
 
 # queue_documents_for_indexing:
 #   cron: "0 0 * * *"
