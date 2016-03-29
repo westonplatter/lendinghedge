@@ -33,7 +33,9 @@ gem 'sinatra', require: nil
 gem 'uglifier', '>= 1.3.0'
 gem 'will_paginate'
 
-gem 'lending_club', github: 'lendinghedge/lending_club'
+gem 'lending_club',
+  github: 'lendinghedge/lending_club'
+  # path: '../lending_club'
 
 group :development do
   gem 'better_errors'

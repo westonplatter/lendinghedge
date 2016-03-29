@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/lendinghedge/lending_club.git
-  revision: 28c1f7d8f536aa0dd88131e856c5a8808437aa71
+  revision: 386f87ab1ce4b475efda21b8f57bb2e47915f570
   specs:
     lending_club (0.0.2)
       faraday (~> 0.9)
